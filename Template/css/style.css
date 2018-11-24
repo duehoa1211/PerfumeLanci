@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700');
+* {
+    font-family: Arial, 'Open Sans', 'Roboto', sans-serif;
+    font-size: 13px;
+}
+
+.relative {
+    position: relative;
+}
+
+.odd {
+    background: #ffffff;
+}
+
+.even {
+    background-color: #faf8fb;
+}
+
+@media only screen and (min-width: 767px) {
+    * {
+        font-size: 14px;
+    }
+    .intro-content {
+        position: relative;
+        background: url(../img/left-leaf.png) top left no-repeat, url(../img/right-leaf.png) bottom right no-repeat;
+        background-size: 20rem;
+        z-index: 2;
+        padding: 10rem;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    .overlay-bg:hover {
+        background-color: #83d2d6;
+        opacity: 0.6;
+        transition: all 0.3s ease;
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    * {
+        font-size: 15px;
+    }
+    .intro-content {
+        position: relative;
+        background: url(../img/left-leaf.png) top left no-repeat, url(../img/right-leaf.png) bottom right no-repeat;
+        background-size: 20rem;
+        padding: 10rem 30rem;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    .overlay-bg:hover {
+        background-color: #83d2d6;
+        opacity: 0.6;
+        transition: all 0.3s ease;
+    }
+}
+
+.content {
+    text-align: justify;
+}
+
+.content>h2 {
+    text-align: center;
+    background-color: inherit;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.content>p {
+    background-color: inherit;
+}
+
+.intro-product {
+    color: #afd7d7;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.intro-product>a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.intro-product img {
+    box-shadow: rgba(166, 166, 166, 0.3) 4px 4px 4px;
+    border-radius: 5%;
+}
+
+.image-area {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.overlay-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.overlay-bg {
+    opacity: 0;
+    text-align: center;
+    padding: 9rem 0;
+}
+
+.overlay-bg>i {
+    font-size: 5rem;
+    color: white;
+    background: transparent;
+}
+
+#product {
+    color: #83d2d6;
+}
+
+.blog {
+    text-align: center;
+}
+
+.blog>p:nth-child(n+1) {
+    margin: 0;
+}
+
+.blog iframe {
+    margin: 3rem 0;
+}
+
+form {
+    margin: 3rem auto;
+    width: 50%;
+}
+
+form>div {
+    margin: 1rem auto;
+}
