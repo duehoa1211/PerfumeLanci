@@ -31,7 +31,7 @@
     }
     .overlay-bg:hover {
         background-color: #83d2d6;
-        opacity: 0.6;
+        opacity: 0.7;
         transition: all 0.3s ease;
     }
 }
@@ -50,7 +50,7 @@
     }
     .overlay-bg:hover {
         background-color: #83d2d6;
-        opacity: 0.6;
+        opacity: 0.7;
         transition: all 0.3s ease;
     }
 }
@@ -133,8 +133,34 @@
 form {
     margin: 3rem auto;
     width: 50%;
+    text-align: center;
 }
 
 form>div {
     margin: 1rem auto;
+}
+
+.btn-custom {
+    background-color: #70cad2;
+    color: #fff;
+    align-self: center;
+}
+
+footer {
+    background-color: #141215;
+    color: white;
+    align-self: auto;
+}
+
+footer>div {
+    text-align: center;
+}
+
+#instagram, #facebook {
+    text-decoration: none;
+    color: white;
+}
+
+#instagram:hover, #facebook:hover {
+    color: #70cad2;
 }
