@@ -11,7 +11,7 @@
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+      <nav class="navbar navbar-expand-md navbar-light bg-light">
         <a class="navbar-brand" href="#">Brand Icon</a>
         <button
           class="navbar-toggler"
@@ -22,33 +22,35 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"> </span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#"
-                >Trang chủ<span class="sr-only">(current)</span></a
-              >
+              <a class="nav-link" href="#">
+                Trang chủ <span class="sr-only"> (current) </span>
+              </a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="#">Sản phẩm</a></li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Giới thiệu</a>
+              <a class="nav-link" href="#product"> Sản phẩm </a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"> Giới thiệu </a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#"> Liên hệ</a></li>
           </ul>
         </div>
       </nav>
     </header>
-    <div class="container-fluid">
-      <div class="row" id="cover">
-        <div class="col-md-12 col-lg-6 mr-auto ml-auto even">
+    <main class="container-fluid" role="main">
+      <div class="row even" id="cover">
+        <div class="col-md-12 col-lg-6 mr-auto ml-auto">
           <img src="img/our-story.jpg" alt="" class="img-fluid" />
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12 align-items-center odd">
-          <div class="intro-content content">
+      <div class="row odd">
+        <div class="col-md-12 align-items-center">
+          <div class="intro-content content" id="intro">
             <h2>NIVAN - THƯƠNG HIỆU MỸ PHẨM ĐẾN TỪ THIÊN NHIÊN</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
@@ -106,13 +108,12 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12 col-lg-8 mr-auto ml-auto even">
+      <div class="row even">
+        <div class="col-12 col-lg-8 mr-auto ml-auto">
           <div class="row">
             <div class="col-12 content" id="product"><h2>Sản phẩm</h2></div>
             <div class="col-6">
               <div class="intro-product relative">
-                <a href="#">
                   <div class="img-area relative">
                     <div class="overlay-image overlay-bg">
                       <i class="far fa-eye"></i>
@@ -149,9 +150,8 @@
           </div>
         </div>
       </div>
-
-      <div class="row">
-        <div class="col-md-12 col-lg-8 mr-auto ml-auto odd">
+      <div class="row odd">
+        <div class="col-md-12 col-lg-8 mr-auto ml-auto ">
           <div class="content blog">
             <h2>Our Work Progress</h2>
             <p>
@@ -176,7 +176,6 @@
           </div>
         </div>
       </div>
-
       <div class="row even">
         <div class="col-md-12 col-lg-8 mr-auto ml-auto">
           <div class="content blog">
@@ -228,7 +227,7 @@
           </form>
         </div>
       </div>
-    </div>
+    </main>
     <footer>
       <div class="container-fluid">
         <div class="row">
@@ -237,7 +236,9 @@
           </div>
           <div class="col-6"></div>
           <div class="col-3">
-            <a href="#"><i id="instagram" class="fab fa-instagram fa-5x"></i></a>
+            <a href="#"
+              ><i id="instagram" class="fab fa-instagram fa-5x"></i
+            ></a>
           </div>
         </div>
       </div>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="#">Brand Icon</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarCollapse"
+          aria-controls="navbarCollapse"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"
+                >Trang chủ<span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">Sản phẩm</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Giới thiệu</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main class="container" role="main">
+      <div class="row">
+        <div class="col-12">
+          <div class="w3-container">
+            <h2>Slideshow Indicators</h2>
+            <p>
+              Using images to indicate how many slides there are in the
+              slideshow, and highlight the image the user is currently viewing.
+            </p>
+          </div>
+
+          <div class="row" style="max-width:1200px">
+            <div class="col-12">
+              <img
+                class="mySlides"
+                src="img/img_nature_wide.jpg"
+                style="width:100%;display:none"
+              />
+              <img
+                class="mySlides"
+                src="img/img_snow_wide.jpg"
+                style="width:100%"
+              />
+              <img
+                class="mySlides"
+                src="img/img_mountains_wide.jpg"
+                style="width:100%;display:none"
+              />
+            </div>
+            <div class="col-12">
+              <div class="row">
+                <div class="col-4">
+                  <img
+                    src="img/img_nature_wide.jpg"
+                    style="width:100%;cursor:pointer"
+                    onclick="currentDiv(1)"
+                  />
+                </div>
+                <div class="col-4">
+                  <img
+                    src="img/img_snow_wide.jpg"
+                    style="width:100%;cursor:pointer"
+                    onclick="currentDiv(2)"
+                  />
+                </div>
+                <div class="col-4">
+                  <img
+                    src="img/img_mountains_wide.jpg"
+                    style="width:100%;cursor:pointer"
+                    onclick="currentDiv(3)"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-3">
+            <a href="#"><i id="facebook" class="fab fa-facebook fa-5x"></i></a>
+          </div>
+          <div class="col-6"></div>
+          <div class="col-3">
+            <a href="#"
+              ><i id="instagram" class="fab fa-instagram fa-5x"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <script>
+      function currentDiv( n ) {
+            showDivs( slideIndex = n );
+        }
+
+        function showDivs( n ) {
+            var i;
+            var x = document.getElementsByClassName( "mySlides" );
+            var dots = document.getElementsByClassName( "demo" );
+            if ( n > x.length ) { slideIndex = 1 }
+            if ( n < 1 ) { slideIndex = x.length }
+            for ( i = 0; i < x.length; i++ )
+            {
+                x[ i ].style.display = "none";
+            }
+            for ( i = 0; i < dots.length; i++ )
+            {
+                dots[ i ].className = dots[ i ].className.replace( " w3-opacity-off", "" );
+            }
+            x[ slideIndex - 1 ].style.display = "block";
+            dots[ slideIndex - 1 ].className += " w3-opacity-off";
+        }
+    </script>
+  </body>
+</html>
