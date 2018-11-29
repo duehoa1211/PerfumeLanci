@@ -17,7 +17,21 @@ namespace Application.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new
+                {
+                    controller = "Admin",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                }
+            );
+            context.MapRoute(
+                "Login_default",
+                "loginadmin/",
+                new
+                {
+                    controller = "Login",
+                    action = "Index"
+                }
             );
         }
     }
