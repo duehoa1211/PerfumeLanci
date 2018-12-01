@@ -38,6 +38,10 @@ namespace Application
                       "~/Scripts/dataTables.bootstrap4.js",
                       "~/Scripts/sb-admin.js"
                 ));
+
+            bundles.Add(new ScriptBundle("~/ckeditor").Include(
+                "~/Scripts/ckeditor/ckeditor.js"
+                ));
         }
     }
 }

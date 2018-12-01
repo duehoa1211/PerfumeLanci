@@ -1,0 +1,31 @@
+﻿@model POST_CATE
+@{
+    /**/
+
+    ViewBag.Title = "PostCateInsertView";
+}
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-plus"></i>Thêm mới nhóm hàng
+    </div>
+    <div class="card-body mb-3">
+        @using (Html.BeginForm("PostCateInsert", "Admin", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group row">
+                @Html.LabelFor(z => z.CATE_NAME, new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(z => z.CATE_NAME, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(z => z.DESCRIP, new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(z => z.DESCRIP, new { @class = "form-control" })
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Thêm mới</button>
+        }
+    </div>
+</div>
