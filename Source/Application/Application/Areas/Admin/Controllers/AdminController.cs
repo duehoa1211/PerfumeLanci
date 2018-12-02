@@ -10,6 +10,7 @@ using Dapper;
 using System.Web.Security;
 using System.Data;
 using Application.Models;
+using System.IO;
 
 namespace Application.Areas.Admin.Controllers
 {
@@ -49,7 +50,9 @@ namespace Application.Areas.Admin.Controllers
         {
             return View();
         }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult PostCateInsert(POST_CATE model)
         {
             using (connection)
@@ -241,5 +244,245 @@ namespace Application.Areas.Admin.Controllers
         }
         #endregion
         #endregion
+
+        #region Post
+        [HttpGet]
+        public ActionResult Post()
+        {
+            using (connection)
+            {
+                var models = connection.Query<POST, POST_CATE, POST_TYPE, POST>(string.Format(@"
+                               SELECT Post.[ID], Post.[TITLE], Post.[CONTENT], Post.[AVARTAR], Post.[ID_TYPE], Post.[CATE_ID], Post.[PRICE], Post.[SEOURL], Post.[ACTIVE],
+                               	      Cate.[ID], Cate.[CATE_NAME], Cate.[DESCRIP], Cate.[THUMBNAIL],
+                               	      Typ.[ID], Typ.[NAME_TYPE], Typ.[THUMBNAIL],Typ.[ID_CATE]
+                               FROM [dbo].[POST] Post
+                               	INNER JOIN [dbo].[POST_CATE] Cate ON Post.CATE_ID = Cate.ID
+                               	INNER JOIN [dbo].[POST_TYPE] Typ ON  Typ.ID = Post.ID_TYPE
+                                "), (Post, Cate, Types) =>
+                                {
+                                    Post.Category = Cate ?? new POST_CATE();
+                                    Post.Type = Types ?? new POST_TYPE();
+                                    return Post;
+                                }, splitOn: "ID,ID");
+                return View(models);
+            }
+        }
+        #region Insert
+        [HttpGet]
+        public ActionResult PostInsertView()
+        {
+            using (connection)
+            {
+                var Cates = connection.Query<POST_CATE>(string.Format(@"
+                                          SELECT [ID]
+                                              ,[CATE_NAME]
+                                              ,[DESCRIP]
+                                              ,[THUMBNAIL]
+                                          FROM [dbo].[POST_CATE]
+                                    "));
+                var Types = connection.Query<POST_TYPE>(string.Format(@"
+                                           SELECT [ID]
+                                               ,[NAME_TYPE]
+                                               ,[DESCRIP]
+                                               ,[THUMBNAIL]
+                                               ,[ID_CATE]
+                                           FROM [dbo].[POST_TYPE]
+                                    "));
+                // ViewBag.CateList = new SelectList(Cates, "ID", "CATE_NAME");
+                ViewBag.CateList = Cates;
+                //ViewBag.TypeList = new SelectList(Types, "ID", "NAME_TYPE");
+                ViewBag.TypeList = Types;
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PostInsert(POST model, HttpPostedFileBase AVARTAR)
+        {
+            using (connection)
+            {
+                var Cates = connection.Query<POST_CATE>(string.Format(@"
+                                          SELECT [ID]
+                                              ,[CATE_NAME]
+                                              ,[DESCRIP]
+                                              ,[THUMBNAIL]
+                                          FROM [dbo].[POST_CATE]
+                                    "));
+                var Types = connection.Query<POST_TYPE>(string.Format(@"
+                                           SELECT [ID]
+                                               ,[NAME_TYPE]
+                                               ,[DESCRIP]
+                                               ,[THUMBNAIL]
+                                               ,[ID_CATE]
+                                           FROM [dbo].[POST_TYPE]
+                                    "));
+                ViewBag.CateList = Cates;
+                ViewBag.TypeList = Types;
+                if (ModelState.IsValid && AVARTAR != null)
+                {
+                    string ext = Path.GetExtension(AVARTAR.FileName).ToLower();
+                    if (ext == ".jpg" || ext == ".png" || ext == ".jpeg")
+                    {
+                        string pic = Path.GetFileName(AVARTAR.FileName);
+                        string path = Path.Combine(Server.MapPath("~/img"), pic);
+                        AVARTAR.SaveAs(path);
+                        var query = string.Format(@"
+                            INSERT INTO [dbo].[POST]
+                                  ([TITLE]
+                                  ,[CONTENT]
+                                  ,[AVARTAR]
+                                  ,[OPTIONAL]
+                                  ,[ACTIVE]
+                                  ,[ID_TYPE]
+                                  ,[CATE_ID]
+                                  ,[PRICE]
+                                  ,[SEOURL])
+                            VALUES(
+                                  N'{0}'
+                                  ,N'{1}'
+                                  ,N'{2}'
+                                  ,N'{3}'
+                                  ,{4}
+                                  ,{5}
+                                  ,{6}
+                                  ,{7}
+                                  ,N'{8}'
+                                  )
+                ", model.TITLE, model.CONTENT, model.AVARTAR,
+                        model.OPTIONAL, model.ACTIVE ? 1 : 0, model.ID_TYPE, model.CATE_ID,
+                        model.PRICE, TonberryKing.Seourl(model.TITLE));
+                        connection.Execute(query);
+                        return RedirectToAction("Post");
+                    }
+                    else
+                    {
+                        ViewBag.Error = "Vui lòng chọn ảnh để làm avatar";
+                        return View("PostInsertView", model);
+                    }
+                }
+                return View("PostInsertView", model);
+            }
+        }
+        #endregion
+
+        #region Update
+        [HttpGet]
+        public ActionResult PostUpdateView(int id)
+        {
+            using (connection)
+            {
+                var Cates = connection.Query<POST_CATE>(string.Format(@"
+                                          SELECT [ID]
+                                              ,[CATE_NAME]
+                                              ,[DESCRIP]
+                                              ,[THUMBNAIL]
+                                          FROM [dbo].[POST_CATE]
+                                    "));
+                var Types = connection.Query<POST_TYPE>(string.Format(@"
+                                           SELECT [ID]
+                                               ,[NAME_TYPE]
+                                               ,[DESCRIP]
+                                               ,[THUMBNAIL]
+                                               ,[ID_CATE]
+                                           FROM [dbo].[POST_TYPE]
+                                    "));
+                ViewBag.CateList = Cates;
+                ViewBag.TypeList = Types;
+
+                var models = connection.Query<POST>(string.Format(@"
+                                           SELECT Post.[ID], Post.[TITLE], Post.[CONTENT], Post.[AVARTAR], Post.[ID_TYPE], Post.[CATE_ID], Post.[PRICE], Post.[SEOURL], Post.[ACTIVE],
+                               	      Cate.[ID], Cate.[CATE_NAME], Cate.[DESCRIP], Cate.[THUMBNAIL],
+                               	      Typ.[ID], Typ.[NAME_TYPE], Typ.[THUMBNAIL],Typ.[ID_CATE]
+                               FROM [dbo].[POST] Post
+                               	INNER JOIN [dbo].[POST_CATE] Cate ON Post.CATE_ID = Cate.ID
+                               	INNER JOIN [dbo].[POST_TYPE] Typ ON  Typ.ID = Post.ID_TYPE
+                                          WHERE Post.[ID] = {0}", id));
+                return View(models.FirstOrDefault());
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PostUpdate(POST model, HttpPostedFileBase AVARTAR)
+        {
+            using (connection)
+            {
+                var Cates = connection.Query<POST_CATE>(string.Format(@"
+                                          SELECT [ID]
+                                              ,[CATE_NAME]
+                                              ,[DESCRIP]
+                                              ,[THUMBNAIL]
+                                          FROM [dbo].[POST_CATE]
+                                    "));
+                var Types = connection.Query<POST_TYPE>(string.Format(@"
+                                           SELECT [ID]
+                                               ,[NAME_TYPE]
+                                               ,[DESCRIP]
+                                               ,[THUMBNAIL]
+                                               ,[ID_CATE]
+                                           FROM [dbo].[POST_TYPE]
+                                    "));
+                ViewBag.CateList = Cates;
+                ViewBag.TypeList = Types;
+                if (ModelState.IsValid && AVARTAR != null)
+                {
+                    string ext = Path.GetExtension(AVARTAR.FileName).ToLower();
+                    if (ext == ".jpg" || ext == ".png" || ext == ".jpeg")
+                    {
+                        string pic = Path.GetFileName(AVARTAR.FileName);
+                        string path = Path.Combine(Server.MapPath("~/img"), pic);
+                        AVARTAR.SaveAs(path);
+                        model.AVARTAR = @"~/img/" + pic;
+                        var query = string.Format(@"
+                            UPDATE [dbo].[POST]
+                            SET [TITLE] = N'{1}'
+                               ,[CONTENT] = N'{2}'
+                               ,[AVARTAR] = N'{3}'
+                               ,[OPTIONAL] = N'{4}'
+                               ,[ACTIVE] = {5}
+                               ,[ID_TYPE] = {6}
+                               ,[CATE_ID] = {7}
+                               ,[PRICE] = {8}
+                               ,[SEOURL] = N'{9}'
+                          WHERE [ID] = {0}
+                ", model.ID, model.TITLE, model.CONTENT, model.AVARTAR,
+                        model.OPTIONAL, model.ACTIVE ? 1 : 0, model.ID_TYPE, model.CATE_ID,
+                        model.PRICE, TonberryKing.Seourl(model.TITLE));
+                        connection.Execute(query);
+                        return RedirectToAction("Post");
+                    }
+                    else
+                    {
+                        ViewBag.Error = "Vui lòng chọn ảnh để làm avatar";
+                        return View("PostUpdateView", model);
+                    }
+                }
+                return View("PostUpdateView", model);
+            }
+        }
+        #endregion
+
+        #region Delete
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PostDelete(int postID)
+        {
+            using (connection)
+            {
+                if (ModelState.IsValid)
+                {
+                    connection.Execute(string.Format(@"
+                    DELETE FROM [dbo].[POST]
+                          WHERE [ID] = {0}", 
+                          postID));
+                    return RedirectToAction("Post");
+                }
+                return RedirectToAction("Post");
+            }
+        }
+        #endregion
+        #endregion
+
     }
 }

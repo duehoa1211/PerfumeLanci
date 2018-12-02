@@ -10,9 +10,10 @@ namespace Application.Models
     {
         public int ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng điền tên nhóm")]
         [Display(Name ="Tên Nhóm")]
         public string CATE_NAME { get; set; }
+
         [Display(Name ="Ghi Chú")]
         public string DESCRIP { get; set; }
 

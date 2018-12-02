@@ -15,7 +15,7 @@ namespace Application.Models
         public string NAME_TYPE { get; set; }
         [Display(Name ="Ghi Chú")]
         public string DESCRIP { get; set; }
-
+        [Display(Name ="Avatar")]
         public string THUMBNAIL { get; set; }
 
         public int? ID_CATE { get; set; }

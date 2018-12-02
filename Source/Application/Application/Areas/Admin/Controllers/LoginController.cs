@@ -58,5 +58,13 @@ namespace Application.Areas.Admin.Controllers
                 return View("Index");
             }
         }
+
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            return Redirect(Url.Action("Index", "Home", new { area = "" }));
+        }
     }
 }

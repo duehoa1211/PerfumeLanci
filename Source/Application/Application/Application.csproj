@@ -151,6 +151,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
+    <Content Include="Scripts\ckeditor\ckeditor.js" />
     <Content Include="Scripts\ckeditor\config.js" />
     <Content Include="Scripts\ckeditor\contents.css" />
     <Content Include="Scripts\ckeditor\lang\af.js" />
@@ -589,8 +590,6 @@
     <Content Include="Areas\Admin\Views\web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="img\anti-pollution-cream.jpg" />
-    <Content Include="img\anti-pollution-cream.png" />
     <Content Include="img\IMG_8904.JPG" />
     <Content Include="img\IMG_8905.JPG" />
     <Content Include="img\IMG_8909.JPG" />
@@ -602,11 +601,7 @@
     <Content Include="img\IMG_8920.JPG" />
     <Content Include="img\IMG_8923.JPG" />
     <Content Include="img\IMG_8925.JPG" />
-    <Content Include="img\img_mountains_wide.jpg" />
-    <Content Include="img\img_nature_wide.jpg" />
-    <Content Include="img\img_snow_wide.jpg" />
     <Content Include="img\left-leaf.png" />
-    <Content Include="img\our-story.jpg" />
     <Content Include="img\right-leaf.png" />
     <Content Include="img\Snapseed %281%29.jpg" />
     <Content Include="img\Snapseed %282%29.jpg" />
@@ -675,6 +670,9 @@
     <Content Include="Areas\Admin\Views\Admin\PostType.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\PostTypeInsertView.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\PostTypeUpdateView.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Post.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\PostInsertView.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\PostUpdateView.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\fontawesome\all.js" />
     <Content Include="Scripts\fontawesome\all.min.js" />
@@ -702,11 +700,15 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\sb-admin.js" />
+    <Content Include="Scripts\sb-admin.min.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
