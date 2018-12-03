@@ -15,7 +15,6 @@
                     <tr>
                         <th>Mã Hàng</th>
                         <th>Tên</th>
-                        <th>Nội dung</th>
                         <th>Giá</th>
                         <th>Loại</th>
                         <th>Nhóm</th>
@@ -31,7 +30,6 @@
                         <tr>
                             <td>@item.ID</td>
                             <td>@item.TITLE</td>
-                            <td>@(item.CONTENT.Length > 1000 ? Html.Raw(item.CONTENT.Substring(0, 1000) + "...") : Html.Raw(item.CONTENT))</td>
                             <td>@String.Format("{0:n0}", item.PRICE)</td>
                             <td>@item.Type.NAME_TYPE</td>
                             <td>@item.Category.CATE_NAME</td>

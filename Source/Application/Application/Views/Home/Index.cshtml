@@ -1,4 +1,5 @@
-﻿@{
+﻿@model FrontPage
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -24,37 +25,42 @@
     <div class="col-12 col-lg-8 mr-auto ml-auto">
         <div class="row">
             <div class="col-12 content" id="product"><h2>Sản phẩm</h2></div>
-            <div class="col-6">
-                <div class="intro-product relative">
-                    <div class="img-area relative">
-                        <div class="overlay-image overlay-bg">
-                            <i class="far fa-eye"></i>
-                        </div>
-                        <img src="~/img/IMG_8912.JPG"
-                             class="img-fluid"
-                             alt="" />
-                    </div>
-                    <p>Kem dưỡng trắng</p>
-                    <h4>NIVAN BODY WHITE LOTION</h4>
-                    </a>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="intro-product relative">
-                    <a href="#">
-                        <div class="img-area relative">
-                            <div class="overlay-image overlay-bg">
-                                <i class="far fa-eye"></i>
+            @foreach (var item in Model.Posts)
+            {
+                <div class="col-6">
+                    <div class="intro-product relative">
+                        <a href="@Url.Action("Product","Home",new { id = item.ID })">
+                            <div class="img-area relative">
+                                <div class="overlay-image overlay-bg">
+                                    <i class="far fa-eye"></i>
+                                </div>
+                                <img src="~/img/@item.AVARTAR"
+                                     class="img-fluid"
+                                     alt="" />
                             </div>
-                            <img src="~/img/IMG_8917.JPG"
-                                 class="img-fluid"
-                                 alt="" />
-                        </div>
-                        <p>Kem dưỡng trắng</p>
-                        <h4>NIVAN BODY WHITE LOTION</h4>
-                    </a>
+                            <p>@item.OPTIONAL</p>
+                            <h4>@item.TITLE</h4>
+                        </a>
+                    </div>
                 </div>
-            </div>
+            }
+
+            @*<div class="col-6">
+                    <div class="intro-product relative">
+                        <a href="#">
+                            <div class="img-area relative">
+                                <div class="overlay-image overlay-bg">
+                                    <i class="far fa-eye"></i>
+                                </div>
+                                <img src="~/img/IMG_8917.JPG"
+                                     class="img-fluid"
+                                     alt="" />
+                            </div>
+                            <p>Kem dưỡng trắng</p>
+                            <h4>NIVAN BODY WHITE LOTION</h4>
+                        </a>
+                    </div>
+                </div>*@
         </div>
     </div>
 </div>
@@ -74,7 +80,7 @@
                 <iframe class="embed-responsive-item"
                         width="560"
                         height="315"
-                        src="https://www.youtube.com/embed/x6q41EnhPnU"
+                        src="@Model.Youtube.DESCRIP"
                         frameborder="0"
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
@@ -93,37 +99,37 @@
             <p>If this could be the start of something beautiful</p>
         </div>
     </div>
-    <br />
-    <div class="col-md-12 col-lg-8 mr-auto ml-auto">
-        <form>
-            <div class="form-row align-items-center">
-                <div class="col-6">
-                    <label class="sr-only">Name</label>
-                    <input type="text"
-                           class="form-control"
-                           placeholder="Your Name" />
+    @*<br />
+        <div class="col-md-12 col-lg-8 mr-auto ml-auto">
+            <form>
+                <div class="form-row align-items-center">
+                    <div class="col-6">
+                        <label class="sr-only">Name</label>
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Your Name" />
+                    </div>
+                    <div class="col-6">
+                        <label class="sr-only">Email</label>
+                        <input type="email" class="form-control" placeholder="Email" />
+                    </div>
                 </div>
-                <div class="col-6">
-                    <label class="sr-only">Email</label>
-                    <input type="email" class="form-control" placeholder="Email" />
+                <div class="form-row">
+                    <div class="col-12">
+                        <label class="sr-only">Title</label>
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Your Title" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="col-12">
-                    <label class="sr-only">Title</label>
-                    <input type="text"
-                           class="form-control"
-                           placeholder="Your Title" />
+                <div class="form-row">
+                    <div class="col-12">
+                        <label class="sr-only">Title</label>
+                        <textarea class="form-control"
+                                  placeholder="Your comments..."></textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="col-12">
-                    <label class="sr-only">Title</label>
-                    <textarea class="form-control"
-                              placeholder="Your comments..."></textarea>
-                </div>
-            </div>
-            <button class="btn btn-custom" type="submit">Send Message</button>
-        </form>
-    </div>
+                <button class="btn btn-custom" type="submit">Send Message</button>
+            </form>
+        </div>*@
 </div>

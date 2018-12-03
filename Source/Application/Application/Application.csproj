@@ -136,6 +136,7 @@
     <Compile Include="Models\ADMINS.cs" />
     <Compile Include="Models\CART.cs" />
     <Compile Include="Models\CART_DETAIL.cs" />
+    <Compile Include="Models\FrontPage.cs" />
     <Compile Include="Models\POST.cs" />
     <Compile Include="Models\POST_CATE.cs" />
     <Compile Include="Models\POST_TYPE.cs" />
@@ -673,6 +674,7 @@
     <Content Include="Areas\Admin\Views\Admin\Post.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\PostInsertView.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\PostUpdateView.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\UrlView.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\fontawesome\all.js" />
     <Content Include="Scripts\fontawesome\all.min.js" />
@@ -715,12 +717,12 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -731,6 +733,8 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Shared\_LayoutProduct.cshtml" />
+    <Content Include="Views\Home\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

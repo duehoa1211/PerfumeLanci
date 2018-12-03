@@ -349,7 +349,7 @@ namespace Application.Areas.Admin.Controllers
                                   ,{7}
                                   ,N'{8}'
                                   )
-                ", model.TITLE, model.CONTENT, model.AVARTAR,
+                ", model.TITLE, model.CONTENT, pic,
                         model.OPTIONAL, model.ACTIVE ? 1 : 0, model.ID_TYPE, model.CATE_ID,
                         model.PRICE, TonberryKing.Seourl(model.TITLE));
                         connection.Execute(query);
@@ -446,7 +446,7 @@ namespace Application.Areas.Admin.Controllers
                                ,[PRICE] = {8}
                                ,[SEOURL] = N'{9}'
                           WHERE [ID] = {0}
-                ", model.ID, model.TITLE, model.CONTENT, model.AVARTAR,
+                ", model.ID, model.TITLE, model.CONTENT, pic,
                         model.OPTIONAL, model.ACTIVE ? 1 : 0, model.ID_TYPE, model.CATE_ID,
                         model.PRICE, TonberryKing.Seourl(model.TITLE));
                         connection.Execute(query);
@@ -474,7 +474,7 @@ namespace Application.Areas.Admin.Controllers
                 {
                     connection.Execute(string.Format(@"
                     DELETE FROM [dbo].[POST]
-                          WHERE [ID] = {0}", 
+                          WHERE [ID] = {0}",
                           postID));
                     return RedirectToAction("Post");
                 }
@@ -484,5 +484,40 @@ namespace Application.Areas.Admin.Controllers
         #endregion
         #endregion
 
+        #region URL
+        [HttpGet]
+        public ActionResult UrlView()
+        {
+            using (connection)
+            {
+                var modules = connection.Query<URL>(string.Format(@"
+                              SELECT [ID]
+                                    ,[NAME]
+                                    ,[DESCRIP]
+                              FROM [dbo].[URL]
+                              WHERE [ID] = 1
+	                          ")).FirstOrDefault();
+                return View(modules);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UrlUpdate(URL model)
+        {
+            using (connection)
+            {
+                if (ModelState.IsValid)
+                {
+                    var modules = connection.Query<URL>(string.Format(@"
+                             UPDATE [dbo].[URL]
+                             SET [DESCRIP] = N'{0}'
+                             WHERE [ID] = 1
+	                          ", model.DESCRIP)).FirstOrDefault();
+                    return RedirectToAction("Index");
+                }
+                return View("UrlView", model);
+            }
+        }
+        #endregion
     }
 }
