@@ -14,11 +14,12 @@
         {
             @Html.AntiForgeryToken()
             <div class="form-group row">
-                @Html.LabelFor(z => z.AVARTAR, new { @class = "col-sm-2 col-form-label" })
+                @Html.HiddenFor(z => z.AVARTAR)
                 <div class="col-sm-10">
                     <img src="#" id="avatar" alt="avatar" />
-                    @Html.TextBoxFor(z => z.AVARTAR, new { @class = "custom-file", type = "file", @onchange= "readURL(this);" })
-                    @if(ViewBag.Error != null)
+                    <input class="custom-file" type="file" onchange="readURL(this);" />
+                    @Html.HiddenFor(z => z.AVARTAR)
+                    @if (ViewBag.Error != null)
                     {
                         <div class="text-danger">@ViewBag.Error</div>
                     }
@@ -28,7 +29,7 @@
                 @Html.LabelFor(z => z.TITLE, new { @class = "col-sm-2 col-form-label" })
                 <div class="col-sm-10">
                     @Html.TextBoxFor(z => z.TITLE, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(z=>z.TITLE,"",new { @class="text-danger"})
+                    @Html.ValidationMessageFor(z => z.TITLE, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group row">
@@ -36,13 +37,6 @@
                 <div class="col-sm-10">
                     @Html.TextBoxFor(z => z.PRICE, new { @class = "form-control", type = "number" })
                     @Html.ValidationMessageFor(z => z.PRICE, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group row">
-                @Html.LabelFor(z => z.ACTIVE, new { @class = "col-sm-2 col-form-label" })
-                <div class="col-sm-1">
-                    @Html.CheckBoxFor(z => z.ACTIVE, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(z => z.ACTIVE, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group row">
@@ -68,8 +62,16 @@
                 </div>
             </div>
             <div class="form-group">
+                <div class="form-check">
+                    @Html.CheckBoxFor(z => z.ACTIVE, new { @class = "form-check-input" })
+                    @Html.LabelFor(z => z.ACTIVE, new { @class = "form-check-label" })
+                    @Html.ValidationMessageFor(z => z.ACTIVE, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
                 @Html.LabelFor(z => z.CONTENT, new { @class = "col-form-label" })
                 @Html.TextAreaFor(z => z.CONTENT, new { @class = "form-control" })
+                <CKFinder:FileBrowser ID="FileBrowser1" BasePath="/ckfinder/" Width="800" runat="server"></CKFinder:FileBrowser>
                 @Html.ValidationMessageFor(z => z.CONTENT, "", new { @class = "text-danger" })
             </div>
             <button type="submit" class="btn btn-primary">Thêm mới</button>
@@ -79,19 +81,18 @@
 
 @section scripts{
     <script>
-        CKEDITOR.replace('CONTENT');
-
+        var editor = CKEDITOR.replace('CONTENT');
+        CKFinder.setupCKEditor(null, '/ckfinder');
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-
                 reader.onload = function (e) {
                     $('#avatar')
                         .attr('src', e.target.result)
                         .width(200)
                         .height(200);
                 };
-
+                $('#AVARTAR').val(input.files[0].name);
                 reader.readAsDataURL(input.files[0]);
             }
         }

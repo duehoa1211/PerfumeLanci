@@ -33,7 +33,7 @@
                             <td>@String.Format("{0:n0}", item.PRICE)</td>
                             <td>@item.Type.NAME_TYPE</td>
                             <td>@item.Category.CATE_NAME</td>
-                            <td><img src="~/img/@item.AVARTAR" class="img-icon" alt="@item.TITLE" /></td>
+                            <td><img src="~/img/images/@item.AVARTAR" class="img-icon" alt="@item.TITLE" /></td>
                             <td><i class="fa @(item.ACTIVE ? "fa-toggle-on": "fa-toggle-off")" style="color:@(item.ACTIVE ? "green": "red")"></i></td>
                             <td><a href="@Url.Action("PostUpdateView","Admin",new { id = item.ID })" class="btn btn-warning text-light"><i class="fas fa-edit"></i></a></td>
                             <td><a data-id="@item.ID" data-name="@item.TITLE" data-toggle="modal" data-target="#deletePost" class="btn btn-danger btn-xoa text-light"><i class="far fa-trash-alt"></i></a></td>

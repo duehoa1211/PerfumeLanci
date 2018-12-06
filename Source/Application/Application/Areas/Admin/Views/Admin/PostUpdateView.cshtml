@@ -17,8 +17,10 @@
             <div class="form-group row">
                 @Html.LabelFor(z => z.AVARTAR, new { @class = "col-sm-2 col-form-label" })
                 <div class="col-sm-10">
-                    <img src="~/img/@Model.AVARTAR" id="avatar" alt="avatar" width="200" height="200" />
-                    @Html.TextBoxFor(z => z.AVARTAR, new { @class = "custom-file", type = "file", @onchange = "readURL(this);" })
+                    <img src="~/img/images/@Model.AVARTAR" id="avatar" alt="avatar" width="200" height="200" />
+                    <input class="custom-file" type="file" onchange="readURL(this);" />
+                    @Html.HiddenFor(z => z.AVARTAR)
+                    @Html.ValidationMessageFor(z => z.AVARTAR, "", new { @class = "text-danger" })
                     @if (ViewBag.Error != null)
                     {
                         <div class="text-danger">@ViewBag.Error</div>
@@ -91,7 +93,7 @@
                         .width(200)
                         .height(200);
                 };
-
+                $('#AVARTAR').val(input.files[0].name);
                 reader.readAsDataURL(input.files[0]);
             }
         }

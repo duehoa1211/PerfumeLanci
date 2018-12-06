@@ -42,6 +42,10 @@ namespace Application
             bundles.Add(new ScriptBundle("~/ckeditor").Include(
                 "~/Scripts/ckeditor/ckeditor.js"
                 ));
+
+            bundles.Add(new ScriptBundle("~/ckfinder").Include(
+                "~/ckfinder/ckfinder.js"
+                ));
         }
     }
 }

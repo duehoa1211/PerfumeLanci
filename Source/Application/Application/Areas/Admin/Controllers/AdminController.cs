@@ -327,6 +327,7 @@ namespace Application.Areas.Admin.Controllers
                         string pic = Path.GetFileName(AVARTAR.FileName);
                         string path = Path.Combine(Server.MapPath("~/img"), pic);
                         AVARTAR.SaveAs(path);
+                        var relativePath = $"~/img/images/{pic}";
                         var query = string.Format(@"
                             INSERT INTO [dbo].[POST]
                                   ([TITLE]
@@ -349,7 +350,7 @@ namespace Application.Areas.Admin.Controllers
                                   ,{7}
                                   ,N'{8}'
                                   )
-                ", model.TITLE, model.CONTENT, pic,
+                ", model.TITLE, model.CONTENT, relativePath,
                         model.OPTIONAL, model.ACTIVE ? 1 : 0, model.ID_TYPE, model.CATE_ID,
                         model.PRICE, TonberryKing.Seourl(model.TITLE));
                         connection.Execute(query);
@@ -433,7 +434,7 @@ namespace Application.Areas.Admin.Controllers
                         string pic = Path.GetFileName(AVARTAR.FileName);
                         string path = Path.Combine(Server.MapPath("~/img"), pic);
                         AVARTAR.SaveAs(path);
-                        model.AVARTAR = @"~/img/" + pic;
+                        var relativePath = $"~/img/images/{pic}";
                         var query = string.Format(@"
                             UPDATE [dbo].[POST]
                             SET [TITLE] = N'{1}'
@@ -446,7 +447,7 @@ namespace Application.Areas.Admin.Controllers
                                ,[PRICE] = {8}
                                ,[SEOURL] = N'{9}'
                           WHERE [ID] = {0}
-                ", model.ID, model.TITLE, model.CONTENT, pic,
+                ", model.ID, model.TITLE, model.CONTENT, relativePath,
                         model.OPTIONAL, model.ACTIVE ? 1 : 0, model.ID_TYPE, model.CATE_ID,
                         model.PRICE, TonberryKing.Seourl(model.TITLE));
                         connection.Execute(query);

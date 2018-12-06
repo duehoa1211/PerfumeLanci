@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700');
+
 * {
-    font-family: Arial, 'Open Sans', 'Roboto', sans-serif;
+    font-family: 'Open Sans', 'Roboto', sans-serif;
     font-size: 14px;
 }
 
@@ -9,9 +10,35 @@ body {
     background-color: #f8f9fa;
 }
 
-#cover{
-    background-color:#ffffff
+.navbar-custom {
+    background-color: rgb(114, 112, 117) !important;
 }
+    /* change the brand and text color */
+    .navbar-custom .navbar-brand,
+    .navbar-custom .navbar-text {
+        color: rgba(109, 202, 205,.8);
+    }
+    /* change the link color */
+    .navbar-custom .navbar-nav .nav-link {
+        color: rgba(109, 202, 205,.5);
+        font-weight:bold;
+    }
+    /* change the color of active or hovered links */
+    .navbar-custom .nav-item.active .nav-link,
+    .navbar-custom .nav-item:hover .nav-link {
+        color: #7acfd1;
+    }
+
+
+    .navbar-custom .navbar-toggler {
+        border-color: #7acfd1;
+        color: #7acfd1;
+    }
+
+#cover {
+    background-color: #ffffff
+}
+
 .relative {
     position: relative;
 }
@@ -28,15 +55,17 @@ body {
     * {
         font-size: 13px;
     }
+
     .intro-content {
         position: relative;
-        background: url(../img/left-leaf.png) top left no-repeat, url(../img/right-leaf.png) bottom right no-repeat;
-        background-size: 20rem;
+        background: url(../img/images/left-leaf.png) top left no-repeat, url(../img/images/right-leaf.png) bottom right no-repeat;
+        background-size: 15rem;
         z-index: 2;
-        padding: 10rem;
+        padding: 7rem;
         margin-left: -15px;
         margin-right: -15px;
     }
+
     .overlay-bg:hover {
         background-color: #83d2d6;
         opacity: 0.7;
@@ -48,14 +77,16 @@ body {
     * {
         font-size: 15px;
     }
+
     .intro-content {
         position: relative;
-        background: url(../img/left-leaf.png) top left no-repeat, url(../img/right-leaf.png) bottom right no-repeat;
+        background: url(../img/images/left-leaf.png) top left no-repeat, url(../img/images/right-leaf.png) bottom right no-repeat;
         background-size: 20rem;
-        padding: 10rem 30rem;
+        padding: 2rem 10rem;
         margin-left: -15px;
         margin-right: -15px;
     }
+
     .overlay-bg:hover {
         background-color: #83d2d6;
         opacity: 0.7;
@@ -67,16 +98,16 @@ body {
     text-align: justify;
 }
 
-.content>h2 {
-    text-align: center;
-    background-color: inherit;
-    padding: 1rem;
-    margin: 1rem 0;
-}
+    .content > h2 {
+        text-align: center;
+        background-color: inherit;
+        padding: 1rem;
+        margin: 1rem 0;
+    }
 
-.content>p {
-    background-color: inherit;
-}
+    .content > p {
+        background-color: inherit;
+    }
 
 .intro-product {
     color: #afd7d7;
@@ -85,15 +116,15 @@ body {
     text-align: center;
 }
 
-.intro-product>a {
-    color: inherit;
-    text-decoration: none;
-}
+    .intro-product > a {
+        color: inherit;
+        text-decoration: none;
+    }
 
-.intro-product img {
-    box-shadow: rgba(166, 166, 166, 0.3) 4px 4px 4px;
-    border-radius: 5%;
-}
+    .intro-product img {
+        box-shadow: rgba(166, 166, 166, 0.3) 4px 4px 4px;
+        border-radius: 5%;
+    }
 
 .image-area {
     width: 100%;
@@ -117,11 +148,11 @@ body {
     border-radius: 4%
 }
 
-.overlay-bg>i {
-    font-size: 5rem;
-    color: white;
-    background: transparent;
-}
+    .overlay-bg > i {
+        font-size: 5rem;
+        color: white;
+        background: transparent;
+    }
 
 #product {
     color: #83d2d6;
@@ -132,13 +163,13 @@ body {
     padding: 3rem;
 }
 
-.blog>p:nth-child(n+1) {
-    margin: 0;
-}
+    .blog > p:nth-child(n+1) {
+        margin: 0;
+    }
 
-.blog iframe {
-    margin: 3rem 0;
-}
+    .blog iframe {
+        margin: 3rem 0;
+    }
 
 form {
     margin: 3rem auto;
@@ -146,9 +177,9 @@ form {
     text-align: center;
 }
 
-form>div {
-    margin: 1rem auto;
-}
+    form > div {
+        margin: 1rem auto;
+    }
 
 .btn-custom {
     background-color: #70cad2;
@@ -162,15 +193,15 @@ footer {
     align-self: auto;
 }
 
-footer>div {
-    text-align: center;
-}
+    footer > div {
+        text-align: center;
+    }
 
 #instagram, #facebook {
     text-decoration: none;
     color: white;
 }
 
-#instagram:hover, #facebook:hover {
-    color: #70cad2;
-}
+    #instagram:hover, #facebook:hover {
+        color: #70cad2;
+    }
