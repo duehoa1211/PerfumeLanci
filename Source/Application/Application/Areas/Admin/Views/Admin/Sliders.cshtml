@@ -1,0 +1,76 @@
+﻿@model IEnumerable<SLIDER>
+@{
+    ViewBag.Title = "Sliders";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Danh sách nhóm hàng
+        <a href="@Url.Action("SliderInsertView","Admin")" class="btn btn-primary float-right">Thêm mới</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-justify">
+                <thead>
+                    <tr>
+                        <td>Ảnh</td>
+                        <td>Mã sản phẩm</td>
+                        <td>Sửa</td>
+                        <td>Xóa</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td><img src="~/img/images/@item.IMAGE" style="max-width:70px; max-height:70px" /></td>
+                        <td>@item.URI</td>
+                        <td><a href="@Url.Action("SliderUpdateView","Admin",new { id = item.ID })" class="btn btn-warning text-light"><i class="fas fa-edit"></i></a></td>
+                        <td><a data-id="@item.ID" data-name="~/img/images/@item.IMAGE" data-toggle="modal" data-target="#deletePost" class="btn btn-danger btn-xoa text-light"><i class="far fa-trash-alt"></i></a></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deletePost" tabindex="-1" role="dialog" aria-labelledby="deletCate" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLongTitle">Delete Group</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("DeleteSlide", "Admin", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <h5>Bạn có chắc rằng muốn xóa</h5>
+                    <img src="" id="postName"  style="max-height:70px; max-width:70px"/>
+                    @Html.Hidden("id")
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-danger float-right">Xóa</button>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(".btn-xoa").click(function () {
+            var id = $(this).data("id");
+            var name = $(this).data("name");
+            $("#postName").attr("src", name);
+            $("#id").val(id);
+        });
+    </script>
+}

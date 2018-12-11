@@ -18,7 +18,7 @@
                 @Html.LabelFor(z => z.AVARTAR, new { @class = "col-sm-2 col-form-label" })
                 <div class="col-sm-10">
                     <img src="~/img/images/@Model.AVARTAR" id="avatar" alt="avatar" width="200" height="200" />
-                    <input class="custom-file" type="file" onchange="readURL(this);" />
+                    <input class="custom-file" type="file" name="image" onchange="readURL(this);" />
                     @Html.HiddenFor(z => z.AVARTAR)
                     @Html.ValidationMessageFor(z => z.AVARTAR, "", new { @class = "text-danger" })
                     @if (ViewBag.Error != null)
@@ -82,7 +82,7 @@
 @section scripts{
     <script>
         CKEDITOR.replace('CONTENT');
-
+        CKFinder.setupCKEditor(null, '/ckfinder');
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();

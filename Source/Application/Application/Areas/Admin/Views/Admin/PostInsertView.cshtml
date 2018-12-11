@@ -14,10 +14,9 @@
         {
             @Html.AntiForgeryToken()
             <div class="form-group row">
-                @Html.HiddenFor(z => z.AVARTAR)
                 <div class="col-sm-10">
                     <img src="#" id="avatar" alt="avatar" />
-                    <input class="custom-file" type="file" onchange="readURL(this);" />
+                    <input class="custom-file" type="file" name="image" onchange="readURL(this);" />
                     @Html.HiddenFor(z => z.AVARTAR)
                     @if (ViewBag.Error != null)
                     {
@@ -71,7 +70,6 @@
             <div class="form-group">
                 @Html.LabelFor(z => z.CONTENT, new { @class = "col-form-label" })
                 @Html.TextAreaFor(z => z.CONTENT, new { @class = "form-control" })
-                <CKFinder:FileBrowser ID="FileBrowser1" BasePath="/ckfinder/" Width="800" runat="server"></CKFinder:FileBrowser>
                 @Html.ValidationMessageFor(z => z.CONTENT, "", new { @class = "text-danger" })
             </div>
             <button type="submit" class="btn btn-primary">Thêm mới</button>

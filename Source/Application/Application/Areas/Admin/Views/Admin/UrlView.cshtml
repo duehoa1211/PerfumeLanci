@@ -1,46 +1,140 @@
-﻿@model Application.Models.URL
+﻿@model IEnumerable<URL>
 
 @{
     ViewBag.Title = "UrlView";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 <div class="card">
+
     <div class="card-header">
-        <i class="fas fa-edit"></i>Sửa link cho youtube
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            @foreach (var item in Model)
+            {
+                if (item.Equals(Model.FirstOrDefault()))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-@item.NAME-tab" data-toggle="pill" href="#pills-@item.NAME" role="tab" aria-controls="pills-@item.NAME" aria-selected="true">@item.NAME</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-@item.NAME-tab" data-toggle="pill" href="#pills-@item.NAME" role="tab" aria-controls="pills-@item.NAME" aria-selected="false">@item.NAME</a>
+                    </li>
+                }
+            }
+        </ul>
     </div>
     <div class="card-body">
-        @using (Html.BeginForm("UrlUpdate","Admin",FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
+        <div class="tab-content" id="pills-tabContent">
+            @foreach (var item in Model)
+            {
+                if (item.Equals(Model.FirstOrDefault()))
+                {
+                    <div class="tab-pane fade show active" id="pills-@item.NAME" role="tabpanel" aria-labelledby="pills-@item.NAME-tab">
+                        <div class="form-horizontal">
 
-            <div class="form-horizontal">
-                @Html.HiddenFor(model => model.ID)
+                            <div class="form-group">
+                                @Html.Label(item.NAME, item.NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBox(item.DESCRIP, item.DESCRIP, new { @class = "form-control link-input", data_id = $"{item.NAME}{item.ID}" })
+                                    <span class="field-validation-valid text-danger" id="@string.Format($"war-{item.NAME}{item.ID}")"></span>
+                                </div>
+                            </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.NAME, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.NAME, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
-                        @Html.ValidationMessageFor(model => model.NAME, "", new { @class = "text-danger" })
+                            @*<div class="form-group">
+                                    @Html.LabelFor(model => model.DESCRIP, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.DESCRIP, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.DESCRIP, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <button data-id="@item.ID" data-title="@item.NAME" data-descript="@item.DESCRIP" id="@string.Format($"{item.NAME}{item.ID}")" data-toggle="modal" data-target="#update" class="btn btn-update btn-default">Cập nhật</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                }
+                else
+                {
+                    <div class="tab-pane fade" id="pills-@item.NAME" role="tabpanel" aria-labelledby="pills-@item.NAME-tab">
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.DESCRIP, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.DESCRIP, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.DESCRIP, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+                        <div class="form-horizontal">
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-default" />
+                            <div class="form-group">
+                                @Html.Label(item.NAME, item.NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">@Html.TextBox(item.DESCRIP, item.DESCRIP, new { @class = "form-control link-input", data_id = $"{item.NAME}{item.ID}" })
+                                <span class="field-validation-valid text-danger" id="@string.Format($"war-{item.NAME}{item.ID}")"></span>
+                                </div>
+                            </div>
+
+                            @*<div class="form-group">
+                                    @Html.LabelFor(model => model.DESCRIP, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.DESCRIP, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.DESCRIP, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <button data-id="@item.ID" data-title="@item.NAME" data-descript="@item.DESCRIP" id="@string.Format($"{item.NAME}{item.ID}")" data-toggle="modal" data-target="#update" class="btn btn-update btn-default">Cập nhật</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
                     </div>
-                </div>
-            </div>
-        }
+                }
+            }
+        </div>
     </div>
     <div class="card-footer">
         @Html.ActionLink("Back to List", "Index")
     </div>
 </div>
+
+@{Html.RenderAction("PartialUrl", "Admin");}
+
+
+@section scripts{
+    <script>
+
+        $(".btn-update").click(function () {
+            var id = $(this).data("id");
+            var name = $(this).data("title");
+            var descript = $(this).data("descript");
+            console.log(descript);
+            if (descript && typeof descript === "undefined") {
+                alert(`Vui lòng nhập dữ liệu cho ${name}`);
+                return;
+            }
+            $(".postName").text(`'${name}'`);
+            $(".PostDes").val(descript);
+            $(".PostDes").text(descript);
+            $(".PostID").val(id);
+        });
+
+        $(".link-input").keyup(function () {
+            var id = $(this).data("id");
+            var values = $(this).val();
+            var error = $(`#war-${id}`);
+            
+            if (typeof values == "undefined" || values === "") {
+                error.text("Vui lòng nhập đường dẫn vào");
+                return;
+            }
+            else {
+                if (error.text() != "") {
+                    error.empty();
+                }
+            }
+            
+            $(`#${id}`).data("descript", values);
+        });
+    </script>
+}

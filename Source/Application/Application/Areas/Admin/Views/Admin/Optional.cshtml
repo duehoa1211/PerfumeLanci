@@ -1,0 +1,36 @@
+﻿@model IEnumerable<OPTIONAL>
+@{
+    ViewBag.Title = "Optional";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Danh sách nhóm hàng
+        <a href="@Url.Action("PostInsertView","Admin")" class="btn btn-primary float-right">Thêm mới</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-justify">
+                <thead>
+                    <tr>
+                        <th>Tên</th>
+                        <th>Avatar</th>
+                        <th>Sửa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.NAME</td>
+                            <td><img src="~/img/images/@item.CONTENTS" alt="@item.NAME" style="max-height:70px; max-width:70px;" /></td>
+                            <th><a class="text-warning" href="@Url.Action("OptPartial","Admin",new {id = item.ID})"><i class="far fa-edit"></i></a></th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

@@ -171,13 +171,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\DataBingding.cs" />
     <Compile Include="Models\ADMINS.cs" />
     <Compile Include="Models\CART.cs" />
     <Compile Include="Models\CART_DETAIL.cs" />
     <Compile Include="Models\FrontPage.cs" />
+    <Compile Include="Models\OPTIONAL.cs" />
     <Compile Include="Models\POST.cs" />
     <Compile Include="Models\POST_CATE.cs" />
     <Compile Include="Models\POST_TYPE.cs" />
+    <Compile Include="Models\SLIDER.cs" />
     <Compile Include="Models\URL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -215,26 +218,29 @@
     <Content Include="Areas\Admin\Views\web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="img\IMG_8904.JPG" />
-    <Content Include="img\IMG_8905.JPG" />
-    <Content Include="img\IMG_8909.JPG" />
-    <Content Include="img\IMG_8912.JPG" />
-    <Content Include="img\IMG_8913 %281%29.JPG" />
-    <Content Include="img\IMG_8913.JPG" />
-    <Content Include="img\IMG_8917.JPG" />
-    <Content Include="img\IMG_8918.JPG" />
-    <Content Include="img\IMG_8920.JPG" />
-    <Content Include="img\IMG_8923.JPG" />
-    <Content Include="img\IMG_8925.JPG" />
-    <Content Include="img\left-leaf.png" />
-    <Content Include="img\right-leaf.png" />
-    <Content Include="img\Snapseed %281%29.jpg" />
-    <Content Include="img\Snapseed %282%29.jpg" />
-    <Content Include="img\Snapseed %283%29.jpg" />
-    <Content Include="img\Snapseed %284%29.jpg" />
-    <Content Include="img\Snapseed %285%29.jpg" />
-    <Content Include="img\Snapseed %286%29.jpg" />
-    <Content Include="img\Snapseed.jpg" />
+    <Content Include="img\images\580b585b2edbce24c47b26d0.png" />
+    <Content Include="img\images\IMG_8904.JPG" />
+    <Content Include="img\images\IMG_8905.JPG" />
+    <Content Include="img\images\IMG_8909.JPG" />
+    <Content Include="img\images\IMG_8912.JPG" />
+    <Content Include="img\images\IMG_8913 %281%29.JPG" />
+    <Content Include="img\images\IMG_8913.JPG" />
+    <Content Include="img\images\IMG_8917.JPG" />
+    <Content Include="img\images\IMG_8918.JPG" />
+    <Content Include="img\images\IMG_8920.JPG" />
+    <Content Include="img\images\IMG_8923.JPG" />
+    <Content Include="img\images\IMG_8925.JPG" />
+    <Content Include="img\images\left-leaf.png" />
+    <Content Include="img\images\logo.png" />
+    <Content Include="img\images\right-leaf.png" />
+    <Content Include="img\images\Snapseed %281%29.jpg" />
+    <Content Include="img\images\Snapseed %282%29.jpg" />
+    <Content Include="img\images\Snapseed %283%29.jpg" />
+    <Content Include="img\images\Snapseed %284%29.jpg" />
+    <Content Include="img\images\Snapseed %285%29.jpg" />
+    <Content Include="img\images\Snapseed %286%29.jpg" />
+    <Content Include="img\images\Snapseed%283%29.jpg" />
+    <Content Include="img\images\Snapseed.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1511,6 +1517,13 @@
     <Content Include="Scripts\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Scripts\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Scripts\ckfinder\userfiles\.htaccess" />
+    <Content Include="Areas\Admin\Views\Admin\ModalUrl.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Intro.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Optional.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\OptPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Sliders.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\SliderInsertView.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\SliderUpdateView.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\fontawesome\all.js" />
     <Content Include="Scripts\fontawesome\all.min.js" />

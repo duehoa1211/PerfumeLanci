@@ -1,0 +1,54 @@
+﻿@model OPTIONAL
+
+@{
+    ViewBag.Title = "OptPartial";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        Cập nhật ảnh @Model.NAME
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("UpdateOpt", "Admin", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(z => z.ID)
+            @Html.HiddenFor(z => z.CONTENTS)
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <img src="~/img/images/@Model.CONTENTS" id="avatar" alt="avatar" style="max-width:150px; max-height:150px;" />
+                    <input class="custom-file" type="file" name="image" onchange="readURL(this);" />
+                    @Html.HiddenFor(z => z.CONTENTS)
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="text-danger">@ViewBag.Error</div>
+                    }
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Cập nhật</button>
+        }
+    </div>
+    <div class="card-footer">
+        <a href="@Url.Action("Optional","Admin")">Trở về danh sách</a>
+    </div>
+</div>        
+@section scripts{
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#avatar')
+                        .attr('src', e.target.result)
+                        .width(200)
+                        .height(200);
+                };
+                $('#CONTENTS').val(input.files[0].name);
+                console.log($('#CONTENTS').val());
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}
