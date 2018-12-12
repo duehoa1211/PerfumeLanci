@@ -22,9 +22,29 @@ namespace Application.Areas.Admin.Controllers
         {
             connection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString);
         }
+
         [HttpGet]
         public ActionResult Index()
         {
+            using (connection)
+            {
+                var modules = connection.Query<CART>(string.Format(@"
+                            SELECT [BILL_ID]
+                                ,[INFOS]
+                                ,[CUSTOMER]
+                                ,[ADDRESS]
+                                ,[PHONENUMBER]
+                                ,[EMAIL]
+                            FROM [dbo].[CART]
+                    "));
+                return View(modules);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Detail(int id)
+        {
+            // TODO: Lấy dữ liệu chi tiết đơn hàng
             return View();
         }
 
@@ -629,7 +649,6 @@ namespace Application.Areas.Admin.Controllers
 
         #endregion
 
-
         #region Slider
         [HttpGet]
         public ActionResult Sliders()
@@ -773,7 +792,7 @@ namespace Application.Areas.Admin.Controllers
                        DELETE FROM [dbo].[SLIDER]
                        WHERE [ID] = {0}
                 ", id));
-                return RedirectToAction("Sliders","Admin");
+                return RedirectToAction("Sliders", "Admin");
             }
         }
         #endregion
