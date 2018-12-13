@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    var facebook = DataBingding.GetFacebook();
+    var youtube = DataBingding.GetYotube();
+    var instagram = DataBingding.GetInstagram();
+    var sliders = DataBingding.GetSlider();
+    var Intro = DataBingding.GetIntro();
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -33,7 +41,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("Index","Home")#intro"> Giới thiệu </a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Home")#Contact"> Liên hệ</a></li>
                 </ul>
             </div>
         </nav>

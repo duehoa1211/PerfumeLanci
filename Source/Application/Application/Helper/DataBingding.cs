@@ -12,12 +12,12 @@ namespace Application.Helper
 {
     public class DataBingding
     {
-        IDbConnection connection;
+        private static IDbConnection connection;
         public DataBingding()
         {
             connection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString);
         }
-        public URL GetFacebook()
+        public static URL GetFacebook()
         {
             using (connection)
             {
@@ -32,7 +32,7 @@ namespace Application.Helper
             }
         }
 
-        public URL GetYotube()
+        public static URL GetYotube()
         {
             using (connection)
             {
@@ -47,7 +47,7 @@ namespace Application.Helper
             }
         }
 
-        public URL GetInstagram()
+        public static URL GetInstagram()
         {
             using (connection)
             {
@@ -62,7 +62,7 @@ namespace Application.Helper
             }
         }
 
-        public OPTIONAL GetIntro()
+        public static OPTIONAL GetIntro()
         {
             using (connection)
             {
@@ -77,7 +77,7 @@ namespace Application.Helper
             }
         }
         
-        public IEnumerable<SLIDER> GetSlider()
+        public static IEnumerable<SLIDER> GetSlider()
         {
             using (connection)
             {
