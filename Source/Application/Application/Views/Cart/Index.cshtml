@@ -2,24 +2,43 @@
 @{
     ViewBag.Title = "Index";
 }
-<div class="row">
-    <div class="col-12">
-        <table class="table table-responsive table-hover">
-            <thead>
-                <tr class="thead-light">
-                    <th>Tên</th>
-                    <th>Số lượng</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.CartDetail)
-                {
-                    <tr>
-                        <td>@item.Product.TITLE</td>
-                        <td>@item.QUANTITY</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+@if (Model != null)
+{
+    <div class="row" style="margin-top: 5rem; margin-bottom:5rem;">
+        <div class="col-md-3">.</div>
+        <div class="col-md-6">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr class="thead-light">
+                            <th>Tên</th>
+                            <th>Số lượng</th>
+                            <th>Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CartDetail)
+                        {
+                            <tr>
+                                <td>@item.Product.TITLE</td>
+                                <td>@item.QUANTITY</td>
+                                <td><a href="@Url.Action("DeleteItem", "Cart", new { id = item.PRODUCT_ID })"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <a href="@Url.Action("CheckOutView", "Cart")" class="btn btn-primary"> Đặt hàng</a>
+            <a href="@Url.Action("Index", "Home")" class="btn btn-secondary"> Quay lại tiếp tục mua hàng</a>
+        </div>
     </div>
-</div>
+}
+else
+{
+    <div class="row" style="margin-top: 5rem; margin-bottom:5rem;">
+        <div class="col-md-3">.</div>
+        <div class="col-md-6">
+           Vui lòng chọn sản phẩm để mua
+        </div>
+    </div>
+}

@@ -1,9 +1,10 @@
 ﻿@{ 
-    var facebook = DataBingding.GetFacebook();
-    var youtube = DataBingding.GetYotube();
-    var instagram = DataBingding.GetInstagram();
-    var sliders = DataBingding.GetSlider();
-    var Intro = DataBingding.GetIntro();
+    var binding = new DataBingding();
+    var facebook = binding.GetFacebook();
+    var instagram = binding.GetInstagram();
+    var sliders = binding.GetSlider();
+    var Intro = binding.GetIntro();
+    var logo = binding.Logo();
 }
 
 <!DOCTYPE html>
@@ -18,7 +19,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-custom fixed-top bg-dark">
-            <a href="@Url.Action("Index","Home")" ><img src="~/img/images/logo.png" style="max-width:150px"/></a>
+            <a href="@Url.Action("Index","Home")" ><img src="~/img/images/@logo.CONTENTS" style="max-width:150px"/></a>
             <button class="navbar-toggler"
                     type="button"
                     data-toggle="collapse"
@@ -41,6 +42,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("Index","Home")#intro"> Giới thiệu </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index","Cart")"> Giỏ hàng </a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -52,11 +56,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-3">
-                    <a href="#"><i id="facebook" class="fab fa-facebook fa-5x"></i></a>
+                    <a href="@facebook.DESCRIP"><i id="facebook" class="fab fa-facebook fa-5x"></i></a>
                 </div>
                 <div class="col-6"></div>
                 <div class="col-3">
-                    <a href="#">
+                    <a href="@instagram.DESCRIP">
                         <i id="instagram" class="fab fa-instagram fa-5x"></i>
                     </a>
                 </div>
