@@ -29,6 +29,7 @@
                         <th>Email</th>
                         <th>Ghi chú</th>
                         <th>Chi tiết</th>
+                        <th>Xóa</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,7 +42,8 @@
                             <td>@item.PHONENUMBER</td>
                             <td>@item.EMAIL</td>
                             <td>@item.INFOS</td>
-                            <td><i class="fa fa-info-circle"></i></td>
+                            <td><a href="@Url.Action("Detail","Admin", new { id = item.BILL_ID })"><i class="fa fa-info-circle"></a></td>
+                            <td><a href="#" class="btn-xoa" data-toggle="modal" data-id="@item.BILL_ID" data-target="#deleteModal"><i class="text-danger fa fa-trash"></i></a></td>
                         </tr>
                     }
                 </tbody>
@@ -50,3 +52,38 @@
     </div>
 </div>
 <!-- /.content-wrapper -->
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("DeleteCart", "Admin", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("postId")
+                    <p>Bạn có chắc muốn xóa toa số <span id="bill-id"></span> </p>
+                    <button type="submit" class="btn btn-danger">Xóa</button>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+<script>
+    $(".btn-xoa").click(function () {
+        var id = $(this).data("id");
+        $("#bill-id").text(`'${id}'`);
+        $("#postId").val(id);
+    });
+</script>
+}
