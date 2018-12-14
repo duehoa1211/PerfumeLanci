@@ -42,7 +42,11 @@
                             <td>@item.PHONENUMBER</td>
                             <td>@item.EMAIL</td>
                             <td>@item.INFOS</td>
+<<<<<<< HEAD
                             <td><a href="@Url.Action("Detail","Admin", new { id = item.BILL_ID })"><i class="fa fa-info-circle"></a></td>
+=======
+                            <td><a href="@Url.Action("Detail","Admin", new { id = item.BILL_ID })"><i class="fa fa-info-circle"></i></a></td>
+>>>>>>> 161219b8b67f34e37dace89e894e177a72b2b3b8
                             <td><a href="#" class="btn-xoa" data-toggle="modal" data-id="@item.BILL_ID" data-target="#deleteModal"><i class="text-danger fa fa-trash"></i></a></td>
                         </tr>
                     }
