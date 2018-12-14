@@ -69,6 +69,7 @@ namespace Application.Areas.Admin.Controllers
                             return cart;
                         }).FirstOrDefault();
             return View(modules);
+<<<<<<< HEAD
         }
         #endregion
 
@@ -94,6 +95,33 @@ namespace Application.Areas.Admin.Controllers
             return RedirectToAction("Index", "Admin");
         }
         #endregion
+=======
+        }
+        #endregion
+
+        #region Delete Cart
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteCart(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                using (connection)
+                {
+                    connection.Execute(string.Format(@"
+                        DELETE FROM [dbo].[CART_DETAIL]
+                        WHERE [BILL_ID] = {0}
+                ", id));
+                    connection.Execute(string.Format(@"
+                        DELETE FROM [dbo].[CART]
+                        WHERE [BILL_ID] = {0}
+                ", id));
+                }
+            }
+            return RedirectToAction("Index", "Admin");
+        }
+        #endregion
+>>>>>>> 161219b8b67f34e37dace89e894e177a72b2b3b8
         #region UpdateCartDetail
         [HttpGet]
         public ActionResult UpdateProdDetail(int id, int proid)

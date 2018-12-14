@@ -1527,6 +1527,13 @@
     <Content Include="Areas\Admin\Views\Admin\SliderUpdateView.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Detail.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\UpdateProdDetail.cshtml" />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+>>>>>>> 161219b8b67f34e37dace89e894e177a72b2b3b8
+>>>>>>> 7839882dfa559a4848f9157c795c3b5f3b740414
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\fontawesome\all.js" />
     <Content Include="Scripts\fontawesome\all.min.js" />

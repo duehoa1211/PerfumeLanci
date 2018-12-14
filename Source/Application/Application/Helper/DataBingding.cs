@@ -12,7 +12,15 @@ namespace Application.Helper
 {
     public class DataBingding
     {
+<<<<<<< HEAD
         private static IDbConnection connection;
+=======
+<<<<<<< HEAD
+        private static IDbConnection connection;
+=======
+        private IDbConnection connection;
+>>>>>>> 161219b8b67f34e37dace89e894e177a72b2b3b8
+>>>>>>> 7839882dfa559a4848f9157c795c3b5f3b740414
         public DataBingding()
         {
             connection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString);

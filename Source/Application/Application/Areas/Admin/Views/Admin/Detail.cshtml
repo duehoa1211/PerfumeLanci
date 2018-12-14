@@ -63,7 +63,15 @@
                                 <td>@item.PRODUCT_ID</td>
                                 <td>@item.Product.TITLE</td>
                                 <td>@item.QUANTITY</td>
+<<<<<<< HEAD
                                 <td class="text-center"><a href="@Url.Action("UpdateProd","Admin", new { id = Model.BILL_ID, proid = item.PRODUCT_ID })"><i class="fa fa-edit"></i></a></td>
+=======
+<<<<<<< HEAD
+                                <td class="text-center"><a href="@Url.Action("UpdateProd","Admin", new { id = Model.BILL_ID, proid = item.PRODUCT_ID })"><i class="fa fa-edit"></i></a></td>
+=======
+                                <td class="text-center"><a href="@Url.Action("UpdateProdDetail","Admin", new { id = Model.BILL_ID, proid = item.PRODUCT_ID })"><i class="fa fa-edit"></i></a></td>
+>>>>>>> 161219b8b67f34e37dace89e894e177a72b2b3b8
+>>>>>>> 7839882dfa559a4848f9157c795c3b5f3b740414
                                 <td class="text-center"><a href="#" data-toggle="modal" data-target="#deleteProduct" data-cart="@item.BILL_ID" data-id="@item.PRODUCT_ID" data-name="@item.Product.TITLE" class="del-prod"><i class="fa fa-trash text-danger"></i></a></td>
                             </tr>
                         }
