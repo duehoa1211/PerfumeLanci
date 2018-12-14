@@ -1,6 +1,10 @@
 ﻿
 @{
     Layout = null;
+    var binding = new DataBingding();
+    var facebook = binding.GetFacebook();
+    var instagram = binding.GetInstagram();
+    var logo = binding.Logo();
 }
 
 <!DOCTYPE html>
@@ -9,13 +13,13 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/style")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
-            <a href="@Url.Action("Index","Home")"><img src="~/img/images/logo.png" style="height:55px" /></a>
+        <nav class="navbar navbar-expand-md navbar-custom fixed-top bg-dark">
+            <a href="@Url.Action("Index","Home")"><img src="~/img/images/@logo.CONTENTS" style="max-width:150px" /></a>
             <button class="navbar-toggler"
                     type="button"
                     data-toggle="collapse"
@@ -38,32 +42,26 @@
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("Index","Home")#intro"> Giới thiệu </a>
                     </li>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("Index","Cart")"> Giỏ hàng </a>
                     </li>
->>>>>>> 161219b8b67f34e37dace89e894e177a72b2b3b8
->>>>>>> 7839882dfa559a4848f9157c795c3b5f3b740414
                 </ul>
             </div>
         </nav>
     </header>
-    <main class="container" role="main">
+    <main class="container product-container" role="main">
         @RenderBody()
     </main>
     <footer>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-3">
-                    <a href="#"><i id="facebook" class="fab fa-facebook fa-5x"></i></a>
+                    <a href="@facebook.DESCRIP"><i id="facebook" class="fab fa-facebook fa-5x"></i></a>
                 </div>
                 <div class="col-6"></div>
                 <div class="col-3">
                     <a href="#">
-                        <i id="instagram" class="fab fa-instagram fa-5x"></i>
+                        <i id="@instagram.DESCRIP" class="fab fa-instagram fa-5x"></i>
                     </a>
                 </div>
             </div>

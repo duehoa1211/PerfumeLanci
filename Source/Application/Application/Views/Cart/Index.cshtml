@@ -1,37 +1,8 @@
 ﻿@model CART
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutProduct.cshtml";
 }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 7839882dfa559a4848f9157c795c3b5f3b740414
-<div class="row">
-    <div class="col-12">
-        <table class="table table-responsive table-hover">
-            <thead>
-                <tr class="thead-light">
-                    <th>Tên</th>
-                    <th>Số lượng</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.CartDetail)
-                {
-                    <tr>
-                        <td>@item.Product.TITLE</td>
-                        <td>@item.QUANTITY</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-<<<<<<< HEAD
-    </div>
-</div>
-=======
-    </div>
-</div>
-=======
 @if (Model != null)
 {
     <div class="row" style="margin-top: 5rem; margin-bottom:5rem;">
@@ -68,9 +39,7 @@ else
     <div class="row" style="margin-top: 5rem; margin-bottom:5rem;">
         <div class="col-md-3">.</div>
         <div class="col-md-6">
-           Vui lòng chọn sản phẩm để mua
+            <h2>Vui lòng chọn sản phẩm để mua</h2>
         </div>
     </div>
 }
->>>>>>> 161219b8b67f34e37dace89e894e177a72b2b3b8
->>>>>>> 7839882dfa559a4848f9157c795c3b5f3b740414

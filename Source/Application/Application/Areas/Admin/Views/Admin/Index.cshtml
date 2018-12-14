@@ -18,45 +18,44 @@
         Danh sách đơn đặt hàng
     </div>
     <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered text-center" id="dataTable">
-                <thead>
-                    <tr>
-                        <th>Mã</th>
-                        <th>Khách hàng</th>
-                        <th>Địa Chỉ</th>
-                        <th>Số điện thoại</th>
-                        <th>Email</th>
-                        <th>Ghi chú</th>
-                        <th>Chi tiết</th>
-                        <th>Xóa</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
+        @if (Model != null)
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered text-center" id="dataTable">
+                    <thead>
                         <tr>
-                            <td>@item.BILL_ID</td>
-                            <td>@item.CUSTOMER</td>
-                            <td>@item.ADDRESS</td>
-                            <td>@item.PHONENUMBER</td>
-                            <td>@item.EMAIL</td>
-                            <td>@item.INFOS</td>
-<<<<<<< HEAD
-                            <td><a href="@Url.Action("Detail","Admin", new { id = item.BILL_ID })"><i class="fa fa-info-circle"></a></td>
-=======
-<<<<<<< HEAD
-                            <td><a href="@Url.Action("Detail","Admin", new { id = item.BILL_ID })"><i class="fa fa-info-circle"></a></td>
-=======
-                            <td><a href="@Url.Action("Detail","Admin", new { id = item.BILL_ID })"><i class="fa fa-info-circle"></i></a></td>
->>>>>>> 161219b8b67f34e37dace89e894e177a72b2b3b8
->>>>>>> 7839882dfa559a4848f9157c795c3b5f3b740414
-                            <td><a href="#" class="btn-xoa" data-toggle="modal" data-id="@item.BILL_ID" data-target="#deleteModal"><i class="text-danger fa fa-trash"></i></a></td>
+                            <th>Mã</th>
+                            <th>Khách hàng</th>
+                            <th>Địa Chỉ</th>
+                            <th>Số điện thoại</th>
+                            <th>Email</th>
+                            <th>Ghi chú</th>
+                            <th>Chi tiết</th>
+                            <th>Xóa</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.BILL_ID</td>
+                                <td>@item.CUSTOMER</td>
+                                <td>@item.ADDRESS</td>
+                                <td>@item.PHONENUMBER</td>
+                                <td>@item.EMAIL</td>
+                                <td>@item.INFOS</td>
+                                <td><a href="@Url.Action("Detail", "Admin", new { id = item.BILL_ID })"><i class="fa fa-info-circle"></i></a></td>
+                                <td><a href="#" class="btn-xoa" data-toggle="modal" data-id="@item.BILL_ID" data-target="#deleteModal"><i class="text-danger fa fa-trash"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <h4> Hiện tại không có đơn hàng nào</h4>
+        }
     </div>
 </div>
 <!-- /.content-wrapper -->
@@ -74,7 +73,7 @@
                 @using (Html.BeginForm("DeleteCart", "Admin", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
-                    @Html.Hidden("postId")
+                    @Html.Hidden("id")
                     <p>Bạn có chắc muốn xóa toa số <span id="bill-id"></span> </p>
                     <button type="submit" class="btn btn-danger">Xóa</button>
                 }
@@ -87,11 +86,11 @@
 </div>
 
 @section scripts{
-<script>
-    $(".btn-xoa").click(function () {
-        var id = $(this).data("id");
-        $("#bill-id").text(`'${id}'`);
-        $("#postId").val(id);
-    });
-</script>
+    <script>
+        $(".btn-xoa").click(function () {
+            var id = $(this).data("id");
+            $("#bill-id").text(`'${id}'`);
+            $("#id").val(id);
+        });
+    </script>
 }

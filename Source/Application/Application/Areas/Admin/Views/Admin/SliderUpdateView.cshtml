@@ -20,7 +20,7 @@
             @Html.HiddenFor(z=>z.ID)
             <div class="form-group row">
                 <div class="col-sm-10">
-                    <img src="#" id="avatar" alt="avatar" />
+                    <img src="~/img/images/@Model.IMAGE" id="avatar" alt="avatar" />
                     <input class="custom-file" type="file" name="images" onchange="readURL(this);" />
                     @Html.HiddenFor(z => z.IMAGE)
                     @if (ViewBag.Error != null)
@@ -43,7 +43,7 @@
                     @Html.ValidationMessageFor(z => z.NAME, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Thêm mới</button>
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
         }
     </div>
 </div>

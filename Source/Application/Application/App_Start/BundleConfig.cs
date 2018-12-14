@@ -22,7 +22,7 @@ namespace Application
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.bundle.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/Content/style").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/fontawesome/all.min.css",
                       "~/Content/site.css",

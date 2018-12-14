@@ -29,3 +29,8 @@ textarea {
 img{
     width:100%;
 }
+
+.product-container {
+    min-height: 78vh;
+    overflow:visible;
+}

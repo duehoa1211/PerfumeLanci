@@ -22,7 +22,7 @@ namespace Application.Areas.Admin.Controllers
         {
             connection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString);
         }
-
+        #region Cart Management
         [HttpGet]
         public ActionResult Index()
         {
@@ -37,6 +37,10 @@ namespace Application.Areas.Admin.Controllers
                                 ,[EMAIL]
                             FROM [dbo].[CART]
                     "));
+                if (!(modules.Count() > 0))
+                {
+                    modules = null;
+                }
                 return View(modules);
             }
         }
@@ -69,10 +73,51 @@ namespace Application.Areas.Admin.Controllers
                             return cart;
                         }).FirstOrDefault();
             return View(modules);
-<<<<<<< HEAD
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateCart(CART model)
+        {
+            if (ModelState.IsValid)
+            {
+                connection.Execute(string.Format(@"
+                    UPDATE [dbo].[CART]
+                    SET [INFOS] = N'{1}'
+                        ,[CUSTOMER] = N'{2}'
+                        ,[ADDRESS] = N'{3}'
+                        ,[PHONENUMBER] = N'{4}'
+                        ,[EMAIL] = N'{5}'
+                    WHERE [BILL_ID] = {0}
+            ", model.BILL_ID, model.INFOS, model.CUSTOMER, model.ADDRESS, model.PHONENUMBER, model.EMAIL));
+                return RedirectToAction("Index", "Admin");
+            }
+            var modules = connection.Query<CART, CART_DETAIL, POST, CART>(string.Format(@"
+                        SELECT CART.[BILL_ID],[INFOS],[CUSTOMER],[ADDRESS],[PHONENUMBER],[EMAIL],
+    	                       DETAIL.[BILL_ID]  ,[PRODUCT_ID]  ,[QUANTITY],
+                               PRODUCT.[ID],  PRODUCT.[TITLE], PRODUCT.[AVARTAR]
+                        FROM [dbo].[CART] CART
+	                         INNER JOIN [dbo].[CART_DETAIL] DETAIL ON CART.BILL_ID = DETAIL.BILL_ID
+                             INNER JOIN [dbo].[POST] PRODUCT ON PRODUCT.[ID] = DETAIL.[PRODUCT_ID]
+                        WHERE CART.[BILL_ID] = {0}", model.BILL_ID),
+                       (Cart, Detail, Post) =>
+                       {
+                           Cart.CartDetail = Cart.CartDetail ?? new List<CART_DETAIL>();
+                           Detail.Product = Post ?? new POST();
+                           if (Detail != null)
+                           {
+                               Cart.CartDetail.Add(Detail);
+                           }
+                           return Cart;
+                       }, splitOn: "BILL_ID,ID").GroupBy(z => z.BILL_ID).Select(lstCart =>
+                       {
+                           var cart = lstCart.FirstOrDefault();
+                           cart.CartDetail = lstCart.Select(z => z.CartDetail.FirstOrDefault()).ToList();
+                           return cart;
+                       }).FirstOrDefault();
+            model.CartDetail = modules.CartDetail;
+            return View("Detail", model);
         }
         #endregion
-
         #region Delete Cart
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -95,33 +140,6 @@ namespace Application.Areas.Admin.Controllers
             return RedirectToAction("Index", "Admin");
         }
         #endregion
-=======
-        }
-        #endregion
-
-        #region Delete Cart
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteCart(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                using (connection)
-                {
-                    connection.Execute(string.Format(@"
-                        DELETE FROM [dbo].[CART_DETAIL]
-                        WHERE [BILL_ID] = {0}
-                ", id));
-                    connection.Execute(string.Format(@"
-                        DELETE FROM [dbo].[CART]
-                        WHERE [BILL_ID] = {0}
-                ", id));
-                }
-            }
-            return RedirectToAction("Index", "Admin");
-        }
-        #endregion
->>>>>>> 161219b8b67f34e37dace89e894e177a72b2b3b8
         #region UpdateCartDetail
         [HttpGet]
         public ActionResult UpdateProdDetail(int id, int proid)
@@ -182,6 +200,8 @@ namespace Application.Areas.Admin.Controllers
             return RedirectToAction("Detail", "Admin", new { id = CartId });
         }
         #endregion
+        #endregion
+
         #region PostCate
         [HttpGet]
         public ActionResult PostCate()
@@ -545,15 +565,15 @@ namespace Application.Areas.Admin.Controllers
                 ViewBag.CateList = Cates;
                 ViewBag.TypeList = Types;
 
-                var models = connection.Query<POST>(string.Format(@"
-                                           SELECT Post.[ID], Post.[TITLE], Post.[CONTENT], Post.[AVARTAR], Post.[ID_TYPE], Post.[CATE_ID], Post.[PRICE], Post.[SEOURL], Post.[ACTIVE],
+                var models = connection.QueryFirstOrDefault<POST>(string.Format(@"
+                                           SELECT Post.[ID], Post.[TITLE], Post.[CONTENT], Post.[AVARTAR], Post.[ID_TYPE], Post.[OPTIONAL] ,Post.[CATE_ID], Post.[PRICE], Post.[SEOURL], Post.[ACTIVE],
                                	      Cate.[ID], Cate.[CATE_NAME], Cate.[DESCRIP], Cate.[THUMBNAIL],
                                	      Typ.[ID], Typ.[NAME_TYPE], Typ.[THUMBNAIL],Typ.[ID_CATE]
                                FROM [dbo].[POST] Post
                                	INNER JOIN [dbo].[POST_CATE] Cate ON Post.CATE_ID = Cate.ID
                                	INNER JOIN [dbo].[POST_TYPE] Typ ON  Typ.ID = Post.ID_TYPE
                                           WHERE Post.[ID] = {0}", id));
-                return View(models.FirstOrDefault());
+                return View(models);
             }
         }
 
@@ -580,15 +600,17 @@ namespace Application.Areas.Admin.Controllers
                                     "));
                 ViewBag.CateList = Cates;
                 ViewBag.TypeList = Types;
-                if (ModelState.IsValid && image != null)
+                if (ModelState.IsValid)
                 {
-                    string ext = Path.GetExtension(image.FileName).ToLower();
-                    if (ext == ".jpg" || ext == ".png" || ext == ".jpeg")
+                    if (image != null)
                     {
-                        string pic = Path.GetFileName(image.FileName);
-                        string path = Path.Combine(Server.MapPath("~/img/images"), pic);
-                        image.SaveAs(path);
-                        var query = string.Format(@"
+                        string ext = Path.GetExtension(image.FileName).ToLower();
+                        if (ext == ".jpg" || ext == ".png" || ext == ".jpeg")
+                        {
+                            string pic = Path.GetFileName(image.FileName);
+                            string path = Path.Combine(Server.MapPath("~/img/images"), pic);
+                            image.SaveAs(path);
+                            var query = string.Format(@"
                             UPDATE [dbo].[POST]
                             SET [TITLE] = N'{1}'
                                ,[CONTENT] = N'{2}'
@@ -601,15 +623,36 @@ namespace Application.Areas.Admin.Controllers
                                ,[SEOURL] = N'{9}'
                           WHERE [ID] = {0}
                 ", model.ID, model.TITLE, model.CONTENT, pic,
-                        model.OPTIONAL, model.ACTIVE ? 1 : 0, model.ID_TYPE, model.CATE_ID,
-                        model.PRICE, TonberryKing.Seourl(model.TITLE));
-                        connection.Execute(query);
-                        return RedirectToAction("Post");
+                            model.OPTIONAL, model.ACTIVE ? 1 : 0, model.ID_TYPE, model.CATE_ID,
+                            model.PRICE, TonberryKing.Seourl(model.TITLE));
+                            connection.Execute(query);
+                            return RedirectToAction("Post");
+                        }
+                        else
+                        {
+                            ViewBag.Error = "Vui lòng chọn ảnh để làm avatar";
+                            return View("PostUpdateView", model);
+                        }
                     }
                     else
                     {
-                        ViewBag.Error = "Vui lòng chọn ảnh để làm avatar";
-                        return View("PostUpdateView", model);
+                        var query = string.Format(@"
+                            UPDATE [dbo].[POST]
+                            SET [TITLE] = N'{1}'
+                               ,[CONTENT] = N'{2}'
+                               ,[AVARTAR] = N'{3}'
+                               ,[OPTIONAL] = N'{4}'
+                               ,[ACTIVE] = {5}
+                               ,[ID_TYPE] = {6}
+                               ,[CATE_ID] = {7}
+                               ,[PRICE] = {8}
+                               ,[SEOURL] = N'{9}'
+                          WHERE [ID] = {0}
+                ", model.ID, model.TITLE, model.CONTENT, model.AVARTAR,
+                           model.OPTIONAL, model.ACTIVE ? 1 : 0, model.ID_TYPE, model.CATE_ID,
+                           model.PRICE, TonberryKing.Seourl(model.TITLE));
+                        connection.Execute(query);
+                        return RedirectToAction("Post");
                     }
                 }
                 return View("PostUpdateView", model);
@@ -888,29 +931,49 @@ namespace Application.Areas.Admin.Controllers
         {
             using (connection)
             {
-                if (ModelState.IsValid && images != null)
+                if (ModelState.IsValid)
                 {
-                    string ext = Path.GetExtension(images.FileName).ToLower();
-                    if (ext == ".jpg" || ext == ".png" || ext == ".jpeg")
+                    if (images != null)
                     {
-                        string pic = Path.GetFileName(images.FileName);
-                        string path = Path.Combine(Server.MapPath("~/img/images"), pic);
-                        images.SaveAs(path);
-                        connection.Execute(string.Format(@"
+                        string ext = Path.GetExtension(images.FileName).ToLower();
+                        if (ext == ".jpg" || ext == ".png" || ext == ".jpeg")
+                        {
+                            string pic = Path.GetFileName(images.FileName);
+                            string path = Path.Combine(Server.MapPath("~/img/images"), pic);
+                            images.SaveAs(path);
+                            connection.Execute(string.Format(@"
                            UPDATE [dbo].[SLIDER]
                            SET [NAME] = N'{1}'
                                 ,[URI] = N'{2}'
                                 ,[IMAGE] = N'{3}'
                            WHERE [ID] = {0}
                         ", model.ID, model.NAME, model.URI, pic));
-                        return RedirectToAction("Sliders");
+                            return RedirectToAction("Sliders");
+                        }
+                        else
+                        {
+                            ViewBag.Error = "Vui lòng chọn ảnh";
+                            return View("SliderUpdateView", model);
+                        }
                     }
                     else
                     {
-                        ViewBag.Error = "Vui lòng chọn ảnh";
-                        return View("SliderUpdateView", model);
+                        connection.Execute(string.Format(@"
+                           UPDATE [dbo].[SLIDER]
+                           SET [NAME] = N'{1}'
+                                ,[URI] = N'{2}'
+                                ,[IMAGE] = N'{3}'
+                           WHERE [ID] = {0}
+                        ", model.ID, model.NAME, model.URI, model.IMAGE));
+                        return RedirectToAction("Sliders");
                     }
                 }
+                var list = connection.Query<POST>(string.Format(@"
+                            SELECT [ID]
+                                ,[TITLE]
+                            FROM [dbo].[POST]
+                            "));
+                model.ListSanPham = new SelectList(list, "ID", "TITLE");
                 return View("SliderUpdateView", model);
             }
         }

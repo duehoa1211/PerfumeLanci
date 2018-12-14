@@ -33,6 +33,20 @@ namespace Application.Controllers
                                     ,[DESCRIP]
                               FROM [dbo].[URL]
                               WHERE [ID] = 1")).FirstOrDefault();
+                frontPage.Intro = connection.QueryFirstOrDefault<OPTIONAL>(string.Format(@"
+                          SELECT [ID]
+                              ,[NAME]
+                              ,[CONTENTS]
+                          FROM [dbo].[Optional] 
+                          WHERE [ID] = 1
+                "));
+                frontPage.Sliders = connection.Query<SLIDER>(string.Format(@"
+                          SELECT [ID]
+                                ,[NAME]
+                                ,[URI]
+                                ,[IMAGE]
+                            FROM [dbo].[SLIDER]
+                "));
                 return View(frontPage);
             }
         }
@@ -47,7 +61,7 @@ namespace Application.Controllers
                            FROM [dbo].[POST] Post
                            WHERE Post.[ACTIVE] = 'True'
                 "));
-                return View(modules.FirstOrDefault());
+                return View(modules.FirstOrDefault(z => z.ID == id));
             }
         }
 

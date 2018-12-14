@@ -5,19 +5,71 @@
 
 
 <div class="row even" id="cover">
-    <div class="col-md-12 col-lg-6 mr-auto ml-auto">
-        <img src="~/img/images/IMG_8909.JPG" alt="" class="img-fluid" />
-    </div>
+    @if (!(Model.Sliders.Count() > 1))
+    {
+        var image = Model.Sliders.FirstOrDefault();
+
+        <div class="col-md-12 col-lg-6 mr-auto ml-auto">
+            <div id="carouselExampleSlidesOnly container" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="~/img/images/@image.IMAGE" alt="" class="img-fluid" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col-md-12 col-lg-6 mr-auto ml-auto">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    @for (int i = 1; i < Model.Sliders.Count(); i++)
+                    {
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    }
+                </ol>
+                <div class="carousel-inner">
+                    @foreach (var item in Model.Sliders)
+                    {
+                        if (item.Equals(Model.Sliders.FirstOrDefault()))
+                        {
+                            <div class="carousel-item active">
+                                <a href="@Url.Action("Product","Home", new { id = item.URI })"><img class="d-block w-100" src="~/img/images/@item.IMAGE" alt="First slide"></a>
+                                <div class="carousel-caption d-md-block">
+                                    @Html.Raw(item.NAME)
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="carousel-item">
+                                <a href="@Url.Action("Product","Home", new { id = item.URI })"><img class="d-block w-100" src="~/img/images/@item.IMAGE" alt="First slide"></a>
+                                <div class="carousel-caption d-md-block">
+                                    @Html.Raw(item.NAME)
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    }
 </div>
 <div class="row odd">
     <div class="col-md-12 align-items-center">
         <div class="intro-content content" id="intro">
-            <h2>NIVAN – THƯƠNG HIỆU MỸ PHẨM ĐẾN TỪ THIÊN NHIÊN</h2>
-            <p>
-                Th&agrave;nh phần trong c&aacute;c sản phẩm đều được chiết xuất từ thi&ecirc;n nhi&ecirc;n như: Cam thảo , hoa hồng Damash, hoa c&uacute;c t&acirc;y , l&aacute; olive, c&acirc;y sơn tr&agrave;, bơ, olive, tinh dầu bưởi, nha đam, tr&agrave; xanh, nấm men Galactomyces, rễ cam thảo, l&aacute; đu đu, diếp c&aacute;&hellip; V&agrave; Niacinamid, Titanium Dioxide, HA, Shea Butter, Macadamia oil&hellip; do đ&oacute; ngay cả những l&agrave;n da nhạy cảm nhất đều c&oacute; thể d&ugrave;ng được.<br />
-                C&aacute;c sản phẩm của NIVAN đều được sản xuất bởi quy tr&igrave;nh v&agrave; c&ocirc;ng nghệ hiện đại c&ugrave;ng đội ngũ chuy&ecirc;n gia nghi&ecirc;n cứu gi&agrave;u kinh nghiệm, chuy&ecirc;n sản xuất c&aacute;c d&ograve;ng mỹ phẩm cao cấp. Ngo&agrave;i ra, trước khi được ph&acirc;n phối rộng r&atilde;i ra thị trường, c&aacute;c sản phẩm của NIVAN đều phải trải qua những quy tr&igrave;nh kiểm duyệt chất lượng khắt khe.<br />
-                NIVAN mong rằng, việc ra mắt thương hiệu cao cấp của m&igrave;nh sẽ tạo dấu ấn tr&ecirc;n thị trường, gi&uacute;p c&aacute;c chị em tiếp cận với những sản phẩm l&agrave;m đẹp ch&iacute;nh h&atilde;ng, chất lượng cao, an to&agrave;n v&agrave; hiệu quả.
-            </p>
+            @Html.Raw(Model.Intro.CONTENTS)
         </div>
     </div>
 </div>
@@ -44,38 +96,13 @@
                     </div>
                 </div>
             }
-
-            @*<div class="col-6">
-                    <div class="intro-product relative">
-                        <a href="#">
-                            <div class="img-area relative">
-                                <div class="overlay-image overlay-bg">
-                                    <i class="far fa-eye"></i>
-                                </div>
-                                <img src="~/img/images/IMG_8917.JPG"
-                                     class="img-fluid"
-                                     alt="" />
-                            </div>
-                            <p>Kem dưỡng trắng</p>
-                            <h4>NIVAN BODY WHITE LOTION</h4>
-                        </a>
-                    </div>
-                </div>*@
         </div>
     </div>
 </div>
 <div class="row odd">
     <div class="col-md-12 col-lg-8 mr-auto ml-auto ">
         <div class="content blog">
-            <h2>Our Work Progress</h2>
-            <p>
-                Was years it seasons was there he form he in them toghether over
-                that,
-            </p>
-            <p>
-                Was years it seasons was there he form he in them toghether over
-                that,
-            </p>
+            <h2>Quy trình hoạt động của chúng tôi</h2>
             <div class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item"
                         width="560"
@@ -88,7 +115,7 @@
         </div>
     </div>
 </div>
-<div class="row even">
+@*<div class="row even">
     <div class="col-md-12 col-lg-8 mr-auto ml-auto">
         <div class="content blog">
             <h2>Hỗ trợ tư vấn</h2>
@@ -99,37 +126,4 @@
             <p>If this could be the start of something beautiful</p>
         </div>
     </div>
-    @*<br />
-        <div class="col-md-12 col-lg-8 mr-auto ml-auto">
-            <form>
-                <div class="form-row align-items-center">
-                    <div class="col-6">
-                        <label class="sr-only">Name</label>
-                        <input type="text"
-                               class="form-control"
-                               placeholder="Your Name" />
-                    </div>
-                    <div class="col-6">
-                        <label class="sr-only">Email</label>
-                        <input type="email" class="form-control" placeholder="Email" />
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-12">
-                        <label class="sr-only">Title</label>
-                        <input type="text"
-                               class="form-control"
-                               placeholder="Your Title" />
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-12">
-                        <label class="sr-only">Title</label>
-                        <textarea class="form-control"
-                                  placeholder="Your comments..."></textarea>
-                    </div>
-                </div>
-                <button class="btn btn-custom" type="submit">Send Message</button>
-            </form>
-        </div>*@
-</div>
+</div>*@

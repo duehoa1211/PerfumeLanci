@@ -16,10 +16,13 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <form class="form-inline" style="padding-left:0; margin-left:0;">
-                    <input type="number" name="" id="" class="form-control col-4" />
+                @using (Html.BeginForm("AddItem", "Cart", FormMethod.Post, new { @class = "form-inline", style = "padding-left:0; margin-left:0;" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("ID", Model.ID)
+                    <input type="number" name="quantity" id="" class="form-control col-4" />
                     <button class="btn btn-success col-8">Thêm vào giỏ</button>
-                </form>
+                }
             </div>
         </div>
     </div>

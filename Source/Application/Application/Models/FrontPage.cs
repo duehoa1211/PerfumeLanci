@@ -9,5 +9,7 @@ namespace Application.Models
     {
         public IEnumerable<POST> Posts { get; set; }
         public URL Youtube { get; set; }
+        public OPTIONAL Intro { get; set; }
+        public IEnumerable<SLIDER> Sliders { get; set; }
     }
 }
