@@ -26,7 +26,7 @@ namespace Application.Controllers
                 FrontPage frontPage = new FrontPage();
                 frontPage.Posts = connection.Query<POST>(string.Format(@" 
                            SELECT Post.[ID], Post.[TITLE], Post.[CONTENT], Post.[AVARTAR], Post.[ID_TYPE], Post.[CATE_ID], Post.[PRICE], Post.[SEOURL], Post.[ACTIVE]
-                           FROM [dbo].[POST] Post
+                           FROM[dbo].[POST] Post
                            WHERE Post.[ACTIVE] = 'True'")).OrderByDescending(z => z.ID).Take(2);
                 frontPage.Youtube = connection.Query<URL>(string.Format(@"SELECT [ID]
                                     ,[NAME]
@@ -47,7 +47,7 @@ namespace Application.Controllers
                            FROM [dbo].[POST] Post
                            WHERE Post.[ACTIVE] = 'True'
                 "));
-                return View(modules.FirstOrDefault(z => z.ID == id));
+                return View(modules.FirstOrDefault());
             }
         }
 

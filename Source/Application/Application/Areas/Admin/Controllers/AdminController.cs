@@ -72,53 +72,6 @@ namespace Application.Areas.Admin.Controllers
         }
         #endregion
 
-        #region Update Cart
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult UpdateCart(CART model)
-        {
-            if (ModelState.IsValid)
-            {
-                connection.Execute(string.Format(@"
-                    UPDATE [dbo].[CART]
-                    SET [INFOS] = N'{1}'
-                        ,[CUSTOMER] = N'{2}'
-                        ,[ADDRESS] = N'{3}'
-                        ,[PHONENUMBER] = N'{4}'
-                        ,[EMAIL] = N'{5}'
-                    WHERE [BILL_ID] = {0}
-            ",model.BILL_ID, model.INFOS, model.CUSTOMER,model.ADDRESS, model.PHONENUMBER, model.EMAIL));
-                return RedirectToAction("Index", "Admin");
-            }
-            var modules = connection.Query<CART, CART_DETAIL, POST, CART>(string.Format(@"
-                        SELECT CART.[BILL_ID],[INFOS],[CUSTOMER],[ADDRESS],[PHONENUMBER],[EMAIL],
-    	                       DETAIL.[BILL_ID]  ,[PRODUCT_ID]  ,[QUANTITY],
-                               PRODUCT.[ID],  PRODUCT.[TITLE], PRODUCT.[AVARTAR]
-                        FROM [dbo].[CART] CART
-	                         INNER JOIN [dbo].[CART_DETAIL] DETAIL ON CART.BILL_ID = DETAIL.BILL_ID
-                             INNER JOIN [dbo].[POST] PRODUCT ON PRODUCT.[ID] = DETAIL.[PRODUCT_ID]
-                        WHERE CART.[BILL_ID] = {0}", model.BILL_ID),
-                       (Cart, Detail, Post) =>
-                       {
-                           Cart.CartDetail = Cart.CartDetail ?? new List<CART_DETAIL>();
-                           Detail.Product = Post ?? new POST();
-                           if (Detail != null)
-                           {
-                               Cart.CartDetail.Add(Detail);
-                           }
-
-                           return Cart;
-                       }, splitOn: "BILL_ID,ID").GroupBy(z => z.BILL_ID).Select(lstCart =>
-                       {
-                           var cart = lstCart.FirstOrDefault();
-                           cart.CartDetail = lstCart.Select(z => z.CartDetail.FirstOrDefault()).ToList();
-                           return cart;
-                       }).FirstOrDefault();
-            model.CartDetail = modules.CartDetail;
-            return View("Detail", model);
-        }
-        #endregion
-
         #region Delete Cart
         [HttpPost]
         [ValidateAntiForgeryToken]

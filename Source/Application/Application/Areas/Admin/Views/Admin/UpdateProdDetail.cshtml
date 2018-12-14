@@ -8,7 +8,7 @@
         Sửa sản phẩm đơn hàng @Model.BILL_ID
     </div>
     <div class="card-body">
-        @using (Html.BeginForm("UpdateProdDet", "Admin", FormMethod.Post))
+        @using (Html.BeginForm("UpdateCartDetail", "Admin", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
             @Html.HiddenFor(z => z.BILL_ID)

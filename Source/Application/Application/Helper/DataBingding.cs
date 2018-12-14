@@ -12,14 +12,14 @@ namespace Application.Helper
 {
     public class DataBingding
     {
-        private IDbConnection connection;
+        private static IDbConnection connection;
         public DataBingding()
         {
             connection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString);
         }
-        public URL GetFacebook()
+        public static URL GetFacebook()
         {
-            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString))
+            using (connection)
             {
                 var module = connection.QueryFirstOrDefault<URL>(string.Format(@"
                      SELECT [ID]
@@ -32,9 +32,9 @@ namespace Application.Helper
             }
         }
 
-        public URL GetYotube()
+        public static URL GetYotube()
         {
-            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString))
+            using (connection)
             {
                 var module = connection.QueryFirstOrDefault<URL>(string.Format(@"
                      SELECT [ID]
@@ -47,9 +47,9 @@ namespace Application.Helper
             }
         }
 
-        public URL GetInstagram()
+        public static URL GetInstagram()
         {
-            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString))
+            using (connection)
             {
                 var module = connection.QueryFirstOrDefault<URL>(string.Format(@"
                      SELECT [ID]
@@ -62,9 +62,9 @@ namespace Application.Helper
             }
         }
 
-        public OPTIONAL GetIntro()
+        public static OPTIONAL GetIntro()
         {
-            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString))
+            using (connection)
             {
                 var module = connection.QueryFirstOrDefault<OPTIONAL>(string.Format(@"
                     SELECT [ID]
@@ -77,30 +77,15 @@ namespace Application.Helper
             }
         }
         
-        public IEnumerable<SLIDER> GetSlider()
+        public static IEnumerable<SLIDER> GetSlider()
         {
-            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString))
+            using (connection)
             {
                 var modules = connection.Query<SLIDER>(string.Format(@"
                     SELECT [ID]
                           ,[NAME]
                           ,[URI]
                     FROM [dbo].[SLIDER]
-                "));
-                return modules;
-            }
-        }
-
-        public OPTIONAL Logo()
-        {
-            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings["db"].ConnectionString))
-            {
-                var modules = connection.QueryFirstOrDefault<OPTIONAL>(string.Format(@"
-                    SELECT [ID]
-                        ,[NAME]
-                        ,[CONTENTS]
-                    FROM [dbo].[Optional]
-                    WHERE [ID] = 2
                 "));
                 return modules;
             }

@@ -24,7 +24,6 @@ namespace Application.Models
 
         [Required(ErrorMessage ="Vui lòng nhập số điện thoại")]
         [Display(Name ="Số điện thoại")]
-        [StringLength(10,ErrorMessage ="Vui lòng chỉ nhập số điện thoại dài 10 chữ số")]
         [DataType(DataType.PhoneNumber)]
         public string PHONENUMBER { get; set; }
 
