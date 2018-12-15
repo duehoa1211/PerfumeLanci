@@ -4,8 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Admin/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @*@Styles.Render("~/Admin/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome/all.min.css" rel="stylesheet" />
+    <link href="~/Content/dataTables.bootstrap4.css" rel="stylesheet" />
+    <link href="~/Content/sb-admin.min.css" rel="stylesheet" />
     <style>
         .img-icon {
             width: 100px;
@@ -77,12 +81,19 @@
         </div>
         <!-- /#wrapper -->
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/ckeditor")
-    @Scripts.Render("~/ckfinder")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/Admin/Script/js")
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/ckeditor")
+        @Scripts.Render("~/ckfinder")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/Admin/Script/js")*@
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script sr="~/ckfinder/ckfinder.js"></script>
+    <script src="~/Scripts/sb-admin.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

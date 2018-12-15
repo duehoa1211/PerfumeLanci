@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     var binding = new DataBingding();
     var facebook = binding.GetFacebook();
     var instagram = binding.GetInstagram();
@@ -15,13 +15,17 @@
     <meta name="Title" content="@ViewBag.Title">
     <meta name="keywords" content="nivan" />
     <meta name="description" content="Các sản phẩm của NIVAN đều được sản xuất bởi quy trình và công nghệ hiện đại cùng đội ngũ chuyên gia nghiên cứu giàu kinh nghiệm, chuyên sản xuất các dòng mỹ phẩm cao cấp. Ngoài ra, trước khi được phân phối rộng rãi ra thị trường, các sản phẩm của NIVAN đều phải trải qua những quy trình kiểm duyệt chất lượng khắt khe." />
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @*@Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome/all.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-custom fixed-top bg-dark">
-            <a href="@Url.Action("Index","Home")" ><img src="~/img/images/@logo.CONTENTS" style="max-width:150px"/></a>
+            <a href="@Url.Action("Index","Home")"><img src="~/img/images/@logo.CONTENTS" style="max-width:150px" /></a>
             <button class="navbar-toggler"
                     type="button"
                     data-toggle="collapse"
@@ -69,8 +73,10 @@
             </div>
         </div>
     </footer>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

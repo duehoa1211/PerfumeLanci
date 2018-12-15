@@ -5,53 +5,59 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @*<style>
-        body {
-            width: 100%;
-            height: 100vh;
-            background-color: #1fc8db;
-            background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
-        }
+            body {
+                width: 100%;
+                height: 100vh;
+                background-color: #1fc8db;
+                background-image: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+            }
 
-        .frmLogin {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            margin-top: -9em;
-            margin-left: -15em;
-            background: #82828261;
-            width: 400px;
-            height: 200px;
-            padding-top: 20px;
-        }
+            .frmLogin {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                margin-top: -9em;
+                margin-left: -15em;
+                background: #82828261;
+                width: 400px;
+                height: 200px;
+                padding-top: 20px;
+            }
 
-        .lbllogin {
-            font-size: 22px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
+            .lbllogin {
+                font-size: 22px;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
 
-        .txtxLogin {
-            width: 94%;
-            border-radius: 20px;
-            font-size: 22px;
-            margin: 0 10px 0 10px;
-        }
+            .txtxLogin {
+                width: 94%;
+                border-radius: 20px;
+                font-size: 22px;
+                margin: 0 10px 0 10px;
+            }
 
-        .btnLogin {
-            width: 100px;
-            height: 40px;
-            border: 1px solid #fff;
-            background: #00ff146b;
-            color: #fff;
-            margin: 20px;
-        }
-    </style>*@
-    @Styles.Render("~/Admin/Content/css")
+            .btnLogin {
+                width: 100px;
+                height: 40px;
+                border: 1px solid #fff;
+                background: #00ff146b;
+                color: #fff;
+                margin: 20px;
+            }
+        </style>*@
+    @*@Styles.Render("~/Admin/Content/css")*@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome/all.min.css" rel="stylesheet" />
+    <link href="~/Content/dataTables.bootstrap4.css" rel="stylesheet" />
+    <link href="~/Content/sb-admin.min.css" rel="stylesheet" />
 </head>
 <body class="bg-dark">
     @RenderBody()
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
 </body>
 </html>
         
