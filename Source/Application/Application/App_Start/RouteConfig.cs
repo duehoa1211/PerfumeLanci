@@ -12,12 +12,25 @@ namespace Application
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapRoute(
+                name: "Product",
+                url: "san-pham/{seourl}-{id}",
+                defaults: new { controller = "Home", action = "Product", id = UrlParameter.Optional, seourl = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
+                name: "Cart",
+                url: "gio-hang",
+                defaults: new { Controller = "Cart", action = "Index" }
+                );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+
         }
     }
 }

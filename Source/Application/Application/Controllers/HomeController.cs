@@ -40,13 +40,17 @@ namespace Application.Controllers
                           FROM [dbo].[Optional] 
                           WHERE [ID] = 1
                 "));
-                frontPage.Sliders = connection.Query<SLIDER>(string.Format(@"
-                          SELECT [ID]
-                                ,[NAME]
-                                ,[URI]
-                                ,[IMAGE]
-                            FROM [dbo].[SLIDER]
-                "));
+                frontPage.Sliders = connection.Query<SLIDER, POST, SLIDER>(string.Format(@"
+                          SELECT SLIDER.[ID],SLIDER.[NAME],SLIDER.[URI],SLIDER.[IMAGE],
+                            	 PRODUCT.[ID],PRODUCT.[TITLE],PRODUCT.[CONTENT],PRODUCT.[AVARTAR],PRODUCT.[OPTIONAL],PRODUCT.[ACTIVE],PRODUCT.[ID_TYPE],PRODUCT.[CATE_ID],PRODUCT.[PRICE],PRODUCT.[SEOURL]
+                          FROM [dbo].[SLIDER] SLIDER
+                                INNER JOIN [dbo].[POST] PRODUCT ON CAST(SLIDER.[URI] AS int) = PRODUCT.[ID]
+
+                "), (Slider, Post) =>
+                {
+                    Slider.SanPham = Post ?? new POST();
+                    return Slider;
+                }, splitOn: "ID");
                 return View(frontPage);
             }
         }

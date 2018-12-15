@@ -22,17 +22,17 @@ namespace Application
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.bundle.js"));
 
-            bundles.Add(new StyleBundle("~/Content/style").Include(
-                      "~/Content/bootstrap.min.css",
-                      "~/Content/fontawesome/all.min.css",
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap.css",
+                      "~/Content/fontawesome/all.css",
                       "~/Content/site.css",
                       "~/Content/style.css"));
 
             bundles.Add(new StyleBundle("~/Admin/Content/css").Include(
                       "~/Content/bootstrap.min.css",
-                      "~/Content/fontawesome/all.min.css",
+                      "~/Content/fontawesome/all.css",
                       "~/Content/dataTables.bootstrap4.css",
-                      "~/Content/sb-admin.min.css"
+                      "~/Content/sb-admin.css"
                 ));
             bundles.Add(new ScriptBundle("~/Admin/Script/js").Include(
                       "~/Scripts/dataTables.bootstrap4.js",

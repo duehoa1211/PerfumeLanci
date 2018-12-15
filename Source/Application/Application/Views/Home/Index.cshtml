@@ -1,6 +1,6 @@
 ﻿@model FrontPage
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Trang chủ - Nivan";
 }
 
 
@@ -37,7 +37,7 @@
                         if (item.Equals(Model.Sliders.FirstOrDefault()))
                         {
                             <div class="carousel-item active">
-                                <a href="@Url.Action("Product","Home", new { id = item.URI })"><img class="d-block w-100" src="~/img/images/@item.IMAGE" alt="First slide"></a>
+                                <a href="@Url.Action("Product","Home", new { id = item.URI, seourl = item.SanPham.SEOURL })"><img class="d-block w-100" src="~/img/images/@item.IMAGE" alt="First slide"></a>
                                 <div class="carousel-caption d-md-block">
                                     @Html.Raw(item.NAME)
                                 </div>
@@ -46,7 +46,7 @@
                         else
                         {
                             <div class="carousel-item">
-                                <a href="@Url.Action("Product","Home", new { id = item.URI })"><img class="d-block w-100" src="~/img/images/@item.IMAGE" alt="First slide"></a>
+                                <a href="@Url.Action("Product","Home", new { id = item.URI, seourl = item.SanPham.SEOURL })"><img class="d-block w-100" src="~/img/images/@item.IMAGE" alt="First slide"></a>
                                 <div class="carousel-caption d-md-block">
                                     @Html.Raw(item.NAME)
                                 </div>
@@ -81,7 +81,7 @@
             {
                 <div class="col-6">
                     <div class="intro-product relative">
-                        <a href="@Url.Action("Product","Home",new { id = item.ID })">
+                        <a href="@Url.Action("Product","Home",new { id = item.ID, seourl = item.SEOURL })">
                             <div class="img-area relative">
                                 <div class="overlay-image overlay-bg">
                                     <i class="far fa-eye"></i>
@@ -115,15 +115,3 @@
         </div>
     </div>
 </div>
-@*<div class="row even">
-    <div class="col-md-12 col-lg-8 mr-auto ml-auto">
-        <div class="content blog">
-            <h2>Hỗ trợ tư vấn</h2>
-            <p>
-                Let us know what you're looking for in an angency. We'll take a
-                look and see
-            </p>
-            <p>If this could be the start of something beautiful</p>
-        </div>
-    </div>
-</div>*@
