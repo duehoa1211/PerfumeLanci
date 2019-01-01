@@ -15,6 +15,7 @@ using System.IO;
 namespace Application.Areas.Admin.Controllers
 {
     [Authorize]
+    //[CompressContent]
     public class AdminController : Controller
     {
         IDbConnection connection;

@@ -162,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\CompressContentAttribute.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
@@ -838,6 +839,19 @@
     <Content Include="Areas\Admin\Views\Admin\PostInsertView.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\PostUpdateView.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\UrlView.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\ModalUrl.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Intro.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Optional.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\OptPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Sliders.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\SliderInsertView.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\SliderUpdateView.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\UpdateProdDetail.cshtml" />
+    <Content Include="webfonts\fa-brands-400.svg" />
+    <Content Include="webfonts\fa-regular-400.svg" />
+    <Content Include="webfonts\fa-solid-900.svg" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Scripts\ckeditor\CHANGES.md" />
     <Content Include="Scripts\ckeditor\LICENSE.md" />
     <Content Include="Scripts\ckeditor\plugins\scayt\CHANGELOG.md" />
@@ -853,16 +867,6 @@
     <Content Include="Scripts\ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
     <Content Include="Scripts\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="Scripts\ckeditor\skins\moono-lisa\readme.md" />
-    <Content Include="Areas\Admin\Views\Admin\ModalUrl.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Intro.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Optional.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\OptPartial.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Sliders.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\SliderInsertView.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\SliderUpdateView.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Detail.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\UpdateProdDetail.cshtml" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\fontawesome\all.js" />
     <Content Include="Scripts\fontawesome\all.min.js" />
@@ -925,6 +929,18 @@
     <Content Include="Views\Home\Product.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Cart\CheckOutView.cshtml" />
+    <Content Include="webfonts\fa-brands-400.eot" />
+    <Content Include="webfonts\fa-brands-400.ttf" />
+    <Content Include="webfonts\fa-brands-400.woff" />
+    <Content Include="webfonts\fa-brands-400.woff2" />
+    <Content Include="webfonts\fa-regular-400.eot" />
+    <Content Include="webfonts\fa-regular-400.ttf" />
+    <Content Include="webfonts\fa-regular-400.woff" />
+    <Content Include="webfonts\fa-regular-400.woff2" />
+    <Content Include="webfonts\fa-solid-900.eot" />
+    <Content Include="webfonts\fa-solid-900.ttf" />
+    <Content Include="webfonts\fa-solid-900.woff" />
+    <Content Include="webfonts\fa-solid-900.woff2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

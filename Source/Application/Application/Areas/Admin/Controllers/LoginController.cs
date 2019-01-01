@@ -13,6 +13,7 @@ using System.Web.Security;
 
 namespace Application.Areas.Admin.Controllers
 {
+    //[CompressContent]
     public class LoginController : Controller
     {
         IDbConnection dataConnection;

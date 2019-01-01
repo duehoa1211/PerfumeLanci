@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Application.Controllers
 {
+    //[CompressContent]
     public class HomeController : Controller
     {
         IDbConnection connection;

@@ -9,9 +9,10 @@ body {
     background-color: #f8f9fa;
 }
 
-#cover{
-    background-color:#ffffff
+#cover {
+    background-color: #ffffff
 }
+
 .relative {
     position: relative;
 }
@@ -157,20 +158,46 @@ form>div {
 }
 
 footer {
-    background-color: #141215;
     color: white;
-    align-self: auto;
 }
 
-footer>div {
-    text-align: center;
+footer ul {
+    margin-top: 1rem;
 }
 
-#instagram, #facebook {
+footer ul li {
+    list-style: none;
+}
+
+footer .col-md-8 ul li:first-child a {
+    font-size: 1.3em;
+}
+
+footer ul li a {
     text-decoration: none;
-    color: white;
+    color: #e8e8e8de;
 }
 
-#instagram:hover, #facebook:hover {
+footer ul li a:hover {
+    color: #e8e8e8de;
+    text-decoration: none;
+    cursor: default;
+}
+
+.social-network>ul>li>a {
+    font-size: 20px;
+}
+
+.social-network>ul>li>a:hover {
     color: #70cad2;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#footer-info {
+    background-color: #484749;
+}
+
+#copyright {
+    background-color: #242424;
 }

@@ -4,10 +4,10 @@
     Layout = "~/Views/Shared/_LayoutProduct.cshtml";
 }
 <div class="row product">
-    <div class="col-6">
+    <div class="col-md-6 col-xs-12 col-sm-12">
         <img src="~/img/images/@Model.AVARTAR" alt="" class="img-thumbnail" />
     </div>
-    <div class="col-6">
+    <div class="col-md-6 col-xs-12 col-sm-12">
         <div class="row">
             <div class="col-12">
                 <h2>@Model.TITLE</h2>
@@ -20,8 +20,12 @@
                 {
                     @Html.AntiForgeryToken()
                     @Html.Hidden("ID", Model.ID)
-                    <input type="number" name="quantity" id="" class="form-control col-4" />
+                    <input type="number" name="quantity" id="" min="0" value="0" class="form-control col-4" />
                     <button class="btn btn-success col-8">Thêm vào giỏ</button>
+                    if (ViewBag.Error != null)
+                    {
+                        <span class="text-danger">@ViewBag.Error</span>
+                    }
                 }
             </div>
         </div>

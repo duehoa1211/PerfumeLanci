@@ -81,18 +81,17 @@
         </div>
         <!-- /#wrapper -->
     </div>
-    @*@Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/Admin/jquery")
+        @Scripts.Render("~/Admin/jqueryval")
         @Scripts.Render("~/ckeditor")
         @Scripts.Render("~/ckfinder")
-        @Scripts.Render("~/bundles/bootstrap")
         @Scripts.Render("~/Admin/Script/js")*@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/ckeditor/ckeditor.js"></script>
-    <script sr="~/ckfinder/ckfinder.js"></script>
+    <script src="~/ckfinder/ckfinder.js"></script>
     <script src="~/Scripts/sb-admin.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>

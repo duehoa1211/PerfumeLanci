@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Application.Controllers
 {
+    //[CompressContent]
     public class CartController : Controller
     {
         IDbConnection connection;
@@ -38,36 +39,46 @@ namespace Application.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddItem(int ID, int quantity)
+        public ActionResult AddItem(int ID, int? quantity)
         {
             if (ModelState.IsValid)
             {
+
                 using (connection)
                 {
                     var product = connection.QueryFirstOrDefault<POST>(string.Format(@"
-                            SELECT [ID], [TITLE], [PRICE]
-                            FROM [dbo].[POST]
+                           SELECT Post.[ID], Post.[TITLE], Post.[CONTENT], Post.[AVARTAR], Post.[ID_TYPE], Post.[CATE_ID], Post.[PRICE], Post.[SEOURL], Post.[ACTIVE]
+                           FROM [dbo].[POST] Post
                             WHERE [ID] = {0}
                             ", ID));
-                    if (product != null)
+                    if (!(quantity <= 0 || quantity == null))
                     {
-                        var detail = new CART_DETAIL();
-                        detail.Product = product;
-                        detail.PRODUCT_ID = product.ID;
-                        detail.QUANTITY = quantity;
-                        var cart = Session["Cart"] as CART ?? new CART();
-                        if (cart.CartDetail != null)
+                        if (product != null)
                         {
-                            UpdateQuantity(ID, quantity);
+                            var detail = new CART_DETAIL();
+                            detail.Product = product;
+                            detail.PRODUCT_ID = product.ID;
+                            detail.QUANTITY = quantity;
+                            var cart = Session["Cart"] as CART ?? new CART();
+                            if (cart.CartDetail != null)
+                            {
+                                UpdateQuantity(ID, quantity ?? 1);
+                                return RedirectToAction("Index");
+                            }
+                            cart.CartDetail = new List<CART_DETAIL>();
+                            cart.CartDetail.Add(detail);
+                            Session["Cart"] = cart;
+
                             return RedirectToAction("Index");
                         }
-                        cart.CartDetail = new List<CART_DETAIL>();
-                        cart.CartDetail.Add(detail);
-                        Session["Cart"] = cart;
-
-                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        ViewBag.Error = "Vui lòng nhập số lượng muốn mua";
+                        return View("~/Views/Home/Product.cshtml", product);
                     }
                 }
+
             }
             return RedirectToAction("Index");
         }

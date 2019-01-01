@@ -25,18 +25,16 @@ namespace Application
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/fontawesome/all.css",
-                      "~/Content/site.css",
+                      "~/Content/Site.css",
                       "~/Content/style.css"));
 
             bundles.Add(new StyleBundle("~/Admin/Content/css").Include(
-                      "~/Content/bootstrap.min.css",
-                      "~/Content/fontawesome/all.css",
-                      "~/Content/dataTables.bootstrap4.css",
-                      "~/Content/sb-admin.css"
+                      "~/Areas/Admin/Content/bootstrap.css",
+                      "~/Areas/Admin/Content/sb-admin.css"
                 ));
             bundles.Add(new ScriptBundle("~/Admin/Script/js").Include(
-                      "~/Scripts/dataTables.bootstrap4.js",
-                      "~/Scripts/sb-admin.js"
+                      "~/Areas/Admin/Scripts/bootstrap.bundle.js",
+                      "~/Areas/Admin/Scripts/sb-admin.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/ckeditor").Include(
